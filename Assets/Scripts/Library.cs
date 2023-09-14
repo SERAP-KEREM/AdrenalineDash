@@ -6,9 +6,9 @@ using UnityEngine.TextCore.Text;
 
 namespace Olcay
 {
-    public class Library : MonoBehaviour
+    public class MathematicalOperations : MonoBehaviour
     {
-        public static void Carpma(int gelenSayi,List<GameObject> Characters,Transform pos)
+        public static void Carpma(int gelenSayi,List<GameObject> Characters,Transform pos, List<GameObject> CreateEffects)
         {
 
             int DonguSayisi=(GameManager.ActiveCharacterCount*gelenSayi)-GameManager.ActiveCharacterCount;
@@ -20,6 +20,18 @@ namespace Olcay
                 {
                     if (!item.activeInHierarchy)
                     {
+
+                        foreach (var item2 in CreateEffects)
+                        {
+                            if (!item2.activeInHierarchy)
+                            {
+                                item2.SetActive(true);
+                                item2.transform.position = pos.position;
+                                item2.GetComponent<ParticleSystem>().Play();
+                                break;
+
+                            }
+                        }
                         item.transform.position = pos.position;
                         item.SetActive(true);
                         num++;
@@ -35,7 +47,7 @@ namespace Olcay
             GameManager.ActiveCharacterCount *= gelenSayi;
         }
 
-        public static void Toplama(int gelenSayi, List<GameObject> Characters, Transform pos)
+        public static void Toplama(int gelenSayi, List<GameObject> Characters, Transform pos, List<GameObject> CreateEffects)
         {
             int num2 = 0;
 
@@ -45,6 +57,17 @@ namespace Olcay
                 {
                     if (!item.activeInHierarchy)
                     {
+                        foreach (var item2 in CreateEffects)
+                        {
+                            if (!item2.activeInHierarchy)
+                            {
+                                item2.SetActive(true);
+                                item2.transform.position = pos.position;
+                                item2.GetComponent<ParticleSystem>().Play();
+                                break;
+
+                            }
+                        }
                         item.transform.position = pos.position;
                         item.SetActive(true);
                         num2++;
@@ -60,12 +83,26 @@ namespace Olcay
            GameManager.ActiveCharacterCount += 3;
         }
 
-        public static void Cikarma(int gelenSayi, List<GameObject> Characters )
+        public static void Cikarma(int gelenSayi, List<GameObject> Characters , List<GameObject> DestroyEffects)
         {
             if (GameManager.ActiveCharacterCount < gelenSayi)
             {
                 foreach (var item in Characters)
                 {
+
+                    foreach (var item2 in DestroyEffects)
+                    {
+                        if (!item2.activeInHierarchy)
+                        {
+                            Vector3 newPos = new Vector3(item.transform.position.x, 0.23f, item.transform.position.z);
+
+                            item2.SetActive(true);
+                            item2.transform.position = newPos;
+                            item2.GetComponent<ParticleSystem>().Play();
+                            break;
+
+                        }
+                    }
                     item.transform.position = Vector3.zero;
                     item.SetActive(false);
                 }
@@ -82,6 +119,19 @@ namespace Olcay
                     {
                         if (item.activeInHierarchy)
                         {
+                            foreach (var item2 in DestroyEffects)
+                            {
+                                if (!item2.activeInHierarchy)
+                                {
+                                    Vector3 newPos = new Vector3(item.transform.position.x, 0.23f, item.transform.position.z);
+
+                                    item2.SetActive(true);
+                                    item2.transform.position = newPos;
+                                    item2.GetComponent<ParticleSystem>().Play();
+                                    break;
+
+                                }
+                            }
                             item.transform.position = Vector3.zero;
                             item.SetActive(false);
                             num3++;
@@ -97,13 +147,26 @@ namespace Olcay
             }
            GameManager.ActiveCharacterCount -= 4;
         }
-        public static void Bolme(int gelenSayi, List<GameObject> Characters)
+        public static void Bolme(int gelenSayi, List<GameObject> Characters, List<GameObject> DestroyEffects)
         {
 
             if (GameManager.ActiveCharacterCount <= gelenSayi)
             {
                 foreach (var item in Characters)
                 {
+                    foreach (var item2 in DestroyEffects)
+                    {
+                        if (!item2.activeInHierarchy)
+                        {
+                            Vector3 newPos = new Vector3(item.transform.position.x, 0.23f, item.transform.position.z);
+
+                            item2.SetActive(true);
+                            item2.transform.position = newPos;
+                            item2.GetComponent<ParticleSystem>().Play();
+                            break;
+
+                        }
+                    }
                     item.transform.position = Vector3.zero;
                     item.SetActive(false);
                 }
@@ -121,6 +184,19 @@ namespace Olcay
                     {
                         if (item.activeInHierarchy)
                         {
+                            foreach (var item2 in DestroyEffects)
+                            {
+                                if (!item2.activeInHierarchy)
+                                {
+                                    Vector3 newPos = new Vector3(item.transform.position.x, 0.23f, item.transform.position.z);
+
+                                    item2.SetActive(true);
+                                    item2.transform.position = newPos;
+                                    item2.GetComponent<ParticleSystem>().Play();
+                                    break;
+
+                                }
+                            }
                             item.transform.position = Vector3.zero;
                             item.SetActive(false);
                             num3++;
@@ -151,5 +227,6 @@ namespace Olcay
                 GameManager.ActiveCharacterCount+=2;
             }
         }
+
     }
 }

@@ -37,24 +37,24 @@ public class GameManager : MonoBehaviour
         switch (islemTuru)
         {
             case "Carpma":
-                Library.Carpma(numObj, Characters, pos);
+                MathematicalOperations.Carpma(numObj, Characters, pos,CreateEffects);
                 break;
             case "Toplama":
-                Library.Toplama(numObj, Characters, pos);
+                MathematicalOperations.Toplama(numObj, Characters, pos, CreateEffects);
                 break;
 
             case "Cikarma":
-                Library.Cikarma(numObj, Characters);
+                MathematicalOperations.Cikarma(numObj, Characters,DestroyEffects);
 
                 break;
             case "Bolme":
-                Library.Bolme(numObj, Characters);
+                MathematicalOperations.Bolme(numObj, Characters,DestroyEffects);
 
                 break;
         }
     }
 
-    public void DestroyEffectMakes(Transform pos)
+    public void DestroyEffectMakes(Vector3 pos)
     {
         foreach (var item in DestroyEffects)
         {
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             {
                 GameManager.ActiveCharacterCount--;
 
-                item.transform.position = pos.position;
+                item.transform.position = pos;
                 item.SetActive(true);
                 item.GetComponent<ParticleSystem>().Play();
                 break;

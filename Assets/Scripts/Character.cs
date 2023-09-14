@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward*0.5f*Time.deltaTime);
+        transform.Translate(Vector3.forward*1f*Time.deltaTime);
     }
 
     private void Update()

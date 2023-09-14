@@ -23,7 +23,9 @@ public class AICharacter : MonoBehaviour
     {
         if(other.CompareTag("CubeObstacle"))
         {
-           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(transform);
+            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
+
+           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
             gameObject.SetActive(false);
         }
     }
