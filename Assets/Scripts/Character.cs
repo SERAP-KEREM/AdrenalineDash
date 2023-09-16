@@ -6,9 +6,13 @@ public class Character : MonoBehaviour
 {
     public GameManager gameManager;
 
+    private Rigidbody rb;
+    public float moveSpeed = 2f;
+
+
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward*1f*Time.deltaTime);
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
     private void Update()
@@ -31,6 +35,7 @@ public class Character : MonoBehaviour
     {
           if(other.CompareTag("Toplama")||other.CompareTag("Cikarma") ||other.CompareTag("Carpma") || other.CompareTag("Bolme"))
         {
+           
             int sayi = int.Parse(other.name);
             gameManager.ManManager(other.tag,sayi,other.transform);
         }

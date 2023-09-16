@@ -24,8 +24,25 @@ public class AICharacter : MonoBehaviour
         if(other.CompareTag("CubeObstacle"))
         {
             Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
-
            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+            gameObject.SetActive(false);
+        }
+        if(other.CompareTag("Testere"))
+        {
+            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
+           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+            gameObject.SetActive(false);
+        } 
+        if(other.CompareTag("PervaneDisli"))
+        {
+            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
+           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+            gameObject.SetActive(false);
+        } 
+        if(other.CompareTag("Balyoz"))
+        {
+            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
+           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos,true);
             gameObject.SetActive(false);
         }
     }

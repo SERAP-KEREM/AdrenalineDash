@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Characters;
     public List<GameObject> CreateEffects;
     public List<GameObject> DestroyEffects;
+    public List<GameObject> AdamLekesiEffects;
 
     private void Update()
     {
@@ -54,21 +55,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DestroyEffectMakes(Vector3 pos)
+    public void DestroyEffectMakes(Vector3 pos, bool isBalyoz=false)
     {
         foreach (var item in DestroyEffects)
         {
             if (!item.activeInHierarchy)
             {
-                GameManager.ActiveCharacterCount--;
 
                 item.transform.position = pos;
                 item.SetActive(true);
                 item.GetComponent<ParticleSystem>().Play();
+                GameManager.ActiveCharacterCount--;
+
                 break;
             }
         }
-    }
+        if(isBalyoz)
+        {
+            Vector3 newPos = new Vector3(pos.x, 0.005f, pos.z);
+
+            foreach (var item in AdamLekesiEffects)
+            {
+                if (!item.activeInHierarchy)
+                {
+                    item.SetActive(true);
+                    item.transform.position = newPos;
+
+                    break;
+                }
+            }
+        }
+    }  
+  
 }
 
 
