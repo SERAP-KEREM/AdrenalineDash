@@ -44,6 +44,12 @@ public class AICharacter : MonoBehaviour
             Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos,true);
             gameObject.SetActive(false);
+        } 
+        if(other.CompareTag("Enemy"))
+        {
+            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
+           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos,false,true);
+            gameObject.SetActive(false);
         }
     }
 }

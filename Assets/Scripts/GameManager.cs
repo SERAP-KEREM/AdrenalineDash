@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Olcay;
+using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,36 @@ public class GameManager : MonoBehaviour
     public List<GameObject> DestroyEffects;
     public List<GameObject> AdamLekesiEffects;
 
+
+    [Header("Level Objects")]
+    public List<GameObject> Enemies;
+    public int EnemyCount;
+    public GameObject MainCharacter;
+    public bool isFinishGame;
+
+    private void Start()
+    {
+        EnemyMakes();
+    }
+
+    public void EnemyMakes()
+    {
+        for (int i = 0; i < EnemyCount; i++)
+        {
+            Enemies[i].SetActive(true);
+        }
+    }
+
+    public void EnemiesAttack()
+    {
+        foreach (var enemy in Enemies) {
+            if (enemy.activeInHierarchy)
+            {
+                enemy.GetComponent<Enemy>().AnimPlay();
+
+            }
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
@@ -33,29 +64,63 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    void WarEvent()
+    {
+        if(ActiveCharacterCount==1|| EnemyCount==0)
+        {
+            isFinishGame = true;
+            foreach(var enemy in Enemies)
+            {
+                if(enemy.activeInHierarchy)
+                {
+                    enemy.GetComponent<Animator>().SetBool("Attack", false);
+                }
+            }
+            foreach(var character in Characters)
+            {
+                if(character.activeInHierarchy)
+                {
+                    character.GetComponent<Animator>().SetBool("Attack", false);
+                }
+            }
+            MainCharacter.GetComponent<Animator>().SetBool("Attack", false);
+
+            if (ActiveCharacterCount < EnemyCount || ActiveCharacterCount==EnemyCount)
+            {
+                Debug.Log("Kaybettin");
+            }
+            else
+            {
+                Debug.Log("Kazandın");
+
+            }
+        }
+
+    }
     public void ManManager(string islemTuru, int numObj, Transform pos)
     {
         switch (islemTuru)
         {
             case "Carpma":
-                MathematicalOperations.Carpma(numObj, Characters, pos,CreateEffects);
+                MathematicalOperations.Carpma(numObj, Characters, pos, CreateEffects);
                 break;
             case "Toplama":
                 MathematicalOperations.Toplama(numObj, Characters, pos, CreateEffects);
                 break;
 
             case "Cikarma":
-                MathematicalOperations.Cikarma(numObj, Characters,DestroyEffects);
+                MathematicalOperations.Cikarma(numObj, Characters, DestroyEffects);
 
                 break;
             case "Bolme":
-                MathematicalOperations.Bolme(numObj, Characters,DestroyEffects);
+                MathematicalOperations.Bolme(numObj, Characters, DestroyEffects);
 
                 break;
         }
     }
 
-    public void DestroyEffectMakes(Vector3 pos, bool isBalyoz=false)
+    public void DestroyEffectMakes(Vector3 pos, bool isBalyoz = false,bool CharacterEvent=false)
     {
         foreach (var item in DestroyEffects)
         {
@@ -65,12 +130,14 @@ public class GameManager : MonoBehaviour
                 item.transform.position = pos;
                 item.SetActive(true);
                 item.GetComponent<ParticleSystem>().Play();
-                GameManager.ActiveCharacterCount--;
-
+                if (!CharacterEvent)
+                   ActiveCharacterCount--;
+                else
+                    EnemyCount--;
                 break;
             }
         }
-        if(isBalyoz)
+        if (isBalyoz)
         {
             Vector3 newPos = new Vector3(pos.x, 0.005f, pos.z);
 
@@ -85,8 +152,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-    }  
-  
+
+        if(!isFinishGame)
+        {
+            WarEvent();
+
+        }
+    }
+
 }
 
 
