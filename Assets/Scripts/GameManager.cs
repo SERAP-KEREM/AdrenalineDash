@@ -6,9 +6,7 @@ using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject DestinationPoint;
-    [SerializeField] public static int ActiveCharacterCount = 1;
-
+    public static int ActiveCharacterCount = 1;
     public List<GameObject> Characters;
     public List<GameObject> CreateEffects;
     public List<GameObject> DestroyEffects;
@@ -20,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int EnemyCount;
     public GameObject MainCharacter;
     public bool isFinishGame;
+     bool isFinish;
 
     private void Start()
     {
@@ -43,6 +42,8 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        isFinish= true;
+        WarEvent();
     }
     private void Update()
     {
@@ -67,35 +68,40 @@ public class GameManager : MonoBehaviour
 
     void WarEvent()
     {
-        if(ActiveCharacterCount==1|| EnemyCount==0)
+        if(isFinish)
         {
-            isFinishGame = true;
-            foreach(var enemy in Enemies)
+            if (ActiveCharacterCount == 1 || EnemyCount == 0)
             {
-                if(enemy.activeInHierarchy)
+                isFinishGame = true;
+                foreach (var enemy in Enemies)
                 {
-                    enemy.GetComponent<Animator>().SetBool("Attack", false);
+                    if (enemy.activeInHierarchy)
+                    {
+                        enemy.GetComponent<Animator>().SetBool("Attack", false);
+                    }
+                }
+                foreach (var character in Characters)
+                {
+                    if (character.activeInHierarchy)
+                    {
+                        character.GetComponent<Animator>().SetBool("Attack", false);
+                    }
+                }
+                MainCharacter.GetComponent<Animator>().SetBool("Attack", false);
+
+                if (ActiveCharacterCount < EnemyCount || ActiveCharacterCount == EnemyCount)
+                {
+                    Debug.Log("Kaybettin");
+                }
+                else
+                {
+                    Debug.Log("Kazandın");
+
                 }
             }
-            foreach(var character in Characters)
-            {
-                if(character.activeInHierarchy)
-                {
-                    character.GetComponent<Animator>().SetBool("Attack", false);
-                }
-            }
-            MainCharacter.GetComponent<Animator>().SetBool("Attack", false);
-
-            if (ActiveCharacterCount < EnemyCount || ActiveCharacterCount==EnemyCount)
-            {
-                Debug.Log("Kaybettin");
-            }
-            else
-            {
-                Debug.Log("Kazandın");
-
-            }
+           
         }
+     
 
     }
     public void ManManager(string islemTuru, int numObj, Transform pos)

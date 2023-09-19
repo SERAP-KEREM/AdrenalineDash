@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.PlayerSettings;
 
 public class AICharacter : MonoBehaviour
 {
-    GameObject Target;
+    public GameObject Target;
     NavMeshAgent navMeshAgent;
+    public GameManager gameManager;
 
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestinationPoint;
     }
+    Vector3 PositionGive()
+    {
+        return new Vector3(transform.position.x, 0.23f, transform.position.z);
 
+    }
     private void LateUpdate()
     {
         navMeshAgent.SetDestination(Target.transform.position);
@@ -23,33 +28,33 @@ public class AICharacter : MonoBehaviour
     {
         if(other.CompareTag("CubeObstacle"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
-           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+          gameManager.DestroyEffectMakes(PositionGive());
             gameObject.SetActive(false);
         }
         if(other.CompareTag("Testere"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
-           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+            gameManager.DestroyEffectMakes(PositionGive());
             gameObject.SetActive(false);
         } 
         if(other.CompareTag("PervaneDisli"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
-           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+           gameManager.DestroyEffectMakes(PositionGive());
             gameObject.SetActive(false);
         } 
         if(other.CompareTag("Balyoz"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
-           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos,true);
+           gameManager.DestroyEffectMakes(PositionGive(), true);
             gameObject.SetActive(false);
         } 
         if(other.CompareTag("Enemy"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, 0.23f,transform.position.z);
-           GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos,false,true);
+           gameManager.DestroyEffectMakes(PositionGive(),false,true);//false
             gameObject.SetActive(false);
+        }
+        if (other.CompareTag("FreeCharacter"))
+        {
+            gameManager.Characters.Add(other.gameObject);
+         
         }
     }
 }

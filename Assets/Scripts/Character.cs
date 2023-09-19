@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public GameManager gameManager;
-    public GameObject camera;
+    public CameraController camera;
     public bool isFinal;
     public float moveSpeed = 2f;
     public GameObject FinalTarget;
@@ -50,13 +50,36 @@ public class Character : MonoBehaviour
             int sayi = int.Parse(other.name);
             gameManager.ManManager(other.tag,sayi,other.transform);
         }
-          else if(other.CompareTag("FinalTrigger"))
+          if(other.CompareTag("FinalTrigger"))
         {
-            Debug.Log("1");
             camera.GetComponent<CameraController>().isFinal=true;
             gameManager.EnemiesAttack();
             isFinal = true;
+        } 
+        if(other.CompareTag("FreeCharacter"))
+        {
+            gameManager.Characters.Add(other.gameObject);
+           
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Pole")|| collision.gameObject.CompareTag("CubeObstacle")||collision.gameObject.CompareTag("PervaneDisli")|| collision.gameObject.CompareTag("Balyoz"))
+        {
+            if (transform.position.x > 0f)
+            {
 
+                Debug.Log("1");
+                transform.position = new Vector3(transform.position.x - 0.3f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+
+                Debug.Log("2");
+
+                transform.position = new Vector3(transform.position.x + 0.3f, transform.position.y, transform.position.z);
+            }
+
+        }
+    }
 }

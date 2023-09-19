@@ -6,7 +6,9 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public GameObject AttackTarget;
-    NavMeshAgent agent;
+   public NavMeshAgent agent;
+    public Animator animator;
+    public GameManager gameManager;
 
     bool isAttackStart;
     public float moveSpeed = 2f;
@@ -19,15 +21,12 @@ public class Enemy : MonoBehaviour
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
     }
-    private void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
+   
 
     public void AnimPlay()
     {
 
-        GetComponent<Animator>().SetBool("Attack", true);
+        animator.SetBool("Attack", true);
         isAttackStart = true;
 
 
@@ -46,7 +45,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("AICharacters"))
         {
             Vector3 newPos = new Vector3(transform.position.x, 0.23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffectMakes(newPos);
+            gameManager.DestroyEffectMakes(newPos);
             gameObject.SetActive(false);
         }
     }
