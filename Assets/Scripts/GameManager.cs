@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
                 item.transform.position = pos;
                 item.SetActive(true);
                 item.GetComponent<ParticleSystem>().Play();
+                item.GetComponent<AudioSource>().Play();
+
                 if (!CharacterEvent)
                    ActiveCharacterCount--;
                 else

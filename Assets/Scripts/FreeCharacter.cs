@@ -41,6 +41,8 @@ public class FreeCharacter : MonoBehaviour
 
                 isContact = true;
                 MatChangeAndAnimPlay();
+                GetComponent<AudioSource>().Play();
+
             }
         }
         if (other.CompareTag("Enemy"))
