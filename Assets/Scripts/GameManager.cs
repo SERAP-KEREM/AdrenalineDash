@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Olcay;
+using SerapKerem;
 using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
     public bool isFinishGame;
      bool isFinish;
 
+    MathematicalOperations mathematicalOperations =new MathematicalOperations();
+    MemoryManager memoryManager = new MemoryManager();
     private void Start()
     {
         EnemyMakes();
+       Debug.Log(memoryManager.LoadData_Int("Puan"));
     }
 
     public void EnemyMakes()
@@ -95,7 +98,11 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Kazandın");
+                    if(ActiveCharacterCount>5)
+                        memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan")+600);
+                    else
+                        memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") + 200);
+
 
                 }
             }
@@ -109,18 +116,18 @@ public class GameManager : MonoBehaviour
         switch (islemTuru)
         {
             case "Carpma":
-                MathematicalOperations.Carpma(numObj, Characters, pos, CreateEffects);
+                mathematicalOperations.Carpma(numObj, Characters, pos, CreateEffects);
                 break;
             case "Toplama":
-                MathematicalOperations.Toplama(numObj, Characters, pos, CreateEffects);
+                mathematicalOperations.Toplama(numObj, Characters, pos, CreateEffects);
                 break;
 
             case "Cikarma":
-                MathematicalOperations.Cikarma(numObj, Characters, DestroyEffects);
+                mathematicalOperations.Cikarma(numObj, Characters, DestroyEffects);
 
                 break;
             case "Bolme":
-                MathematicalOperations.Bolme(numObj, Characters, DestroyEffects);
+                mathematicalOperations.Bolme(numObj, Characters, DestroyEffects);
 
                 break;
         }

@@ -83,6 +83,6 @@ public class FreeCharacter : MonoBehaviour
         animator.SetBool("Attack", true);
         gameObject.tag = "AICharacters";
         GameManager.ActiveCharacterCount++;
-        Debug.Log(GameManager.ActiveCharacterCount);
+       // Debug.Log(GameManager.ActiveCharacterCount);
     }
 }

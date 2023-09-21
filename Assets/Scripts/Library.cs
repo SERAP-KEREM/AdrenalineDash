@@ -4,14 +4,14 @@ using UnityEngine;
 using static UnityEditor.PlayerSettings;
 using UnityEngine.TextCore.Text;
 
-namespace Olcay
+namespace SerapKerem
 {
-    public class MathematicalOperations : MonoBehaviour
+    public class MathematicalOperations
     {
-        public static void Carpma(int gelenSayi,List<GameObject> Characters,Transform pos, List<GameObject> CreateEffects)
+        public void Carpma(int gelenSayi, List<GameObject> Characters, Transform pos, List<GameObject> CreateEffects)
         {
 
-            int DonguSayisi=(GameManager.ActiveCharacterCount*gelenSayi)-GameManager.ActiveCharacterCount;
+            int DonguSayisi = (GameManager.ActiveCharacterCount * gelenSayi) - GameManager.ActiveCharacterCount;
             int num = 0;
 
             foreach (var item in Characters)
@@ -49,7 +49,7 @@ namespace Olcay
             GameManager.ActiveCharacterCount *= gelenSayi;
         }
 
-        public static void Toplama(int gelenSayi, List<GameObject> Characters, Transform pos, List<GameObject> CreateEffects)
+        public void Toplama(int gelenSayi, List<GameObject> Characters, Transform pos, List<GameObject> CreateEffects)
         {
             int num2 = 0;
 
@@ -84,10 +84,10 @@ namespace Olcay
                 }
 
             }
-           GameManager.ActiveCharacterCount += 3;
+            GameManager.ActiveCharacterCount += 3;
         }
 
-        public static void Cikarma(int gelenSayi, List<GameObject> Characters , List<GameObject> DestroyEffects)
+        public void Cikarma(int gelenSayi, List<GameObject> Characters, List<GameObject> DestroyEffects)
         {
             if (GameManager.ActiveCharacterCount < gelenSayi)
             {
@@ -153,9 +153,9 @@ namespace Olcay
 
                 }
             }
-           GameManager.ActiveCharacterCount -= 4;
+            GameManager.ActiveCharacterCount -= 4;
         }
-        public static void Bolme(int gelenSayi, List<GameObject> Characters, List<GameObject> DestroyEffects)
+        public void Bolme(int gelenSayi, List<GameObject> Characters, List<GameObject> DestroyEffects)
         {
 
             if (GameManager.ActiveCharacterCount <= gelenSayi)
@@ -180,7 +180,7 @@ namespace Olcay
                     item.transform.position = Vector3.zero;
                     item.SetActive(false);
                 }
-               GameManager.ActiveCharacterCount = 1;
+                GameManager.ActiveCharacterCount = 1;
             }
 
             else
@@ -236,9 +236,45 @@ namespace Olcay
             else
             {
                 GameManager.ActiveCharacterCount /= gelenSayi;
-                GameManager.ActiveCharacterCount+=2;
+                GameManager.ActiveCharacterCount += 2;
             }
         }
 
+
+
+    }
+
+    public class MemoryManager
+    {
+        public void SaveData_String(string key, string value)
+        {
+            PlayerPrefs.SetString(key, value);
+            PlayerPrefs.Save();
+        }
+        public void SaveData_Int(string key, int value)
+        {
+            PlayerPrefs.SetInt(key, value);
+            PlayerPrefs.Save();
+
+        }
+        public void SaveData_Float(string key, float value)
+        {
+            PlayerPrefs.SetFloat(key, value);
+            PlayerPrefs.Save();
+        }
+
+
+        public string LoadData_String(string key)
+        {
+            return PlayerPrefs.GetString(key);
+        }
+        public int LoadData_Int(string key)
+        {
+            return PlayerPrefs.GetInt(key);
+        }
+        public float LoadData_Float(string key)
+        {
+            return PlayerPrefs.GetFloat(key);
+        }
     }
 }

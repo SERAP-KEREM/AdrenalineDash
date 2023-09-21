@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -10,22 +11,38 @@ public class Character : MonoBehaviour
     public float moveSpeed = 2f;
     public GameObject FinalTarget;
 
-
+    public Slider slider;
+    public GameObject TransitPoint;
     private void FixedUpdate()
     {
         if(!isFinal)
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
+
+    private void Start()
+    {
+            float fark = Vector3.Distance(transform.position, TransitPoint.transform.position);
+        slider.maxValue = fark;
+    }
     private void Update()
     {
+
+
         if(isFinal)
         {
             transform.position = Vector3.Lerp(transform.position, FinalTarget.transform.position, 0.001f);
+            if(slider.value != 0f)
+            {
+                slider.value -= .01f;
 
+            }
         }
         else
         {
+            float fark = Vector3.Distance(transform.position, TransitPoint.transform.position);
+            slider.value = fark;    
+
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 if (Input.GetAxis("Mouse X") < 0)
