@@ -276,5 +276,14 @@ namespace SerapKerem
         {
             return PlayerPrefs.GetFloat(key);
         }
+
+        public void ControlAndDefine()
+        {
+            if(!PlayerPrefs.HasKey("EndLevel"))
+            {
+                PlayerPrefs.SetInt("EndLevel", 5);
+                PlayerPrefs.SetInt("Puan", 0);
+            }
+        }
     }
 }

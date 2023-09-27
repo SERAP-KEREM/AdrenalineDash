@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
                         memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan")+600);
                     else
                         memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") + 200);
+                    memoryManager.SaveData_Int("EndLevel", memoryManager.LoadData_Int("EndLevel")+1);
 
 
                 }
