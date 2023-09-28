@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,11 +7,15 @@ using SerapKerem;
 public class MainMenuManager : MonoBehaviour
 {
     MemoryManager memoryManager=new MemoryManager();
+    DataManager dataManager=new DataManager();  
     public GameObject ExitPanel;
 
+
+    public List<ItemInformations> itemInformations = new List<ItemInformations>();
     private void Start()
     {
         memoryManager.ControlAndDefine();
+        //dataManager.FirstCreateSave(itemInformations);//tüm itemler bitince aktifleştir
     }
     public void SceneLoad(int index)
     {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 using UnityEngine.TextCore.Text;
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SerapKerem
 {
@@ -279,11 +282,79 @@ namespace SerapKerem
 
         public void ControlAndDefine()
         {
-            if(!PlayerPrefs.HasKey("EndLevel"))
+            if (!PlayerPrefs.HasKey("EndLevel"))
             {
                 PlayerPrefs.SetInt("EndLevel", 5);
                 PlayerPrefs.SetInt("Puan", 0);
             }
+        }
+    }
+
+    public class AllData
+    {
+        public static List<ItemInformations> itemnfo = new List<ItemInformations>();
+    }
+
+
+    [Serializable]
+    public class ItemInformations
+    {
+        public int GroupIndex;
+        public int ItemIndex;
+        public string ItemName;
+        public int Puan;
+        public bool isBuy;
+    }
+
+    public class DataManager
+    {
+        
+        public void Save(List<ItemInformations> itemInformations)
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = File.OpenWrite(Application.persistentDataPath + "/ItemData.gd");
+            binaryFormatter.Serialize(fileStream, itemInformations);
+            fileStream.Close();
+
+        }  
+       
+
+
+        List<ItemInformations> itemLoadInformations;
+        public void Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/ItemData.gd"))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream fileStream = File.Open(Application.persistentDataPath + "/ItemData.gd", FileMode.Open);
+                itemLoadInformations = (List<ItemInformations>)binaryFormatter.Deserialize(fileStream);
+                fileStream.Close();
+
+            }
+            else
+            {
+                Debug.LogError("No File");
+            }
+        }
+
+        public List<ItemInformations> ExportList()
+        {
+            return itemLoadInformations;
+        }
+
+
+        public void FirstCreateSave(List<ItemInformations> itemInformations)
+        {
+            if (!File.Exists(Application.persistentDataPath + "/ItemData.gd"))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream fileStream = File.Create(Application.persistentDataPath + "/ItemData.gd");
+                binaryFormatter.Serialize(fileStream, itemInformations);
+                fileStream.Close();
+
+            }
+
+
         }
     }
 }
