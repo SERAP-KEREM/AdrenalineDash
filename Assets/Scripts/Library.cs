@@ -312,7 +312,7 @@ namespace SerapKerem
         public void Save(List<ItemInformations> itemInformations)
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = File.OpenWrite(Application.persistentDataPath + "/ItemData.gd");
+            FileStream fileStream = File.Create(Application.persistentDataPath + "/ItemData.gd");//
             binaryFormatter.Serialize(fileStream, itemInformations);
             fileStream.Close();
 
