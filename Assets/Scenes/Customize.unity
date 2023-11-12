@@ -1381,17 +1381,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfad62687ef8414da8272eca7214a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuanText: {fileID: 221612168}
+  PuanText: {fileID: 1469665645}
   itemPanels:
   - {fileID: 1361752298}
   - {fileID: 191093676}
   - {fileID: 160564681}
   itemCanvas: {fileID: 917825556}
-  GeneralObjects:
-  - {fileID: 1153926566}
-  - {fileID: 1631437020}
+  GeneralPanels:
   - {fileID: 1251247892}
   - {fileID: 1373637295}
+  OperationButtons:
+  - {fileID: 1153926568}
+  - {fileID: 1631437022}
+  BuyButtonText: {fileID: 1175787289}
   HatText: {fileID: 221612168}
   Hats:
   - {fileID: 230060000}
@@ -1418,7 +1420,6 @@ MonoBehaviour:
   - {fileID: 359989366}
   MaterialText: {fileID: 701267420}
   CharacterMaterials:
-  - {fileID: 2100000, guid: c0c97c41b1e80d04087e0c1971b57ba9, type: 2}
   - {fileID: 2100000, guid: 8ac12ef73f8459940abcd0755ae6fac9, type: 2}
   - {fileID: 2100000, guid: 6a973fa1dcea8c24a8110d1b14027406, type: 2}
   - {fileID: 2100000, guid: b214056839cc79f4fbd65b8010c05445, type: 2}
@@ -1426,10 +1427,14 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f0614c69df22f1647a99403cdd9dfb03, type: 2}
   - {fileID: 2100000, guid: 0f43ce225d7b51e48a70b7c299ea1653, type: 2}
   - {fileID: 2100000, guid: 040958b0a5a69584cb72e0349dd177f1, type: 2}
+  FirstMaterials: {fileID: 2100000, guid: c0c97c41b1e80d04087e0c1971b57ba9, type: 2}
   CharacterButtonList:
   - {fileID: 1140495043}
   - {fileID: 1456577806}
-  meshRenderer: {fileID: 6084845794115083831}
+  meshRenderer:
+  - {fileID: 6084845794115083831}
+  - {fileID: 1662260819563238034}
+  - {fileID: 7989543293567857691}
   itemInformations:
   - GroupIndex: 1
     ItemIndex: 0
@@ -1503,41 +1508,36 @@ MonoBehaviour:
     isBuy: 0
   - GroupIndex: 3
     ItemIndex: 0
-    ItemName: Macadamia
-    Puan: 0
-    isBuy: 0
-  - GroupIndex: 3
-    ItemIndex: 1
     ItemName: Almond
     Puan: 500
     isBuy: 0
   - GroupIndex: 3
-    ItemIndex: 2
+    ItemIndex: 1
     ItemName: Blue
     Puan: 1000
     isBuy: 0
   - GroupIndex: 3
-    ItemIndex: 3
+    ItemIndex: 2
     ItemName: Green
     Puan: 1000
     isBuy: 0
   - GroupIndex: 3
-    ItemIndex: 4
+    ItemIndex: 3
     ItemName: Orange
     Puan: 1000
     isBuy: 0
   - GroupIndex: 3
-    ItemIndex: 5
+    ItemIndex: 4
     ItemName: Purple
     Puan: 1000
     isBuy: 0
   - GroupIndex: 3
-    ItemIndex: 6
+    ItemIndex: 5
     ItemName: Red
     Puan: 1000
     isBuy: 0
   - GroupIndex: 3
-    ItemIndex: 7
+    ItemIndex: 6
     ItemName: Yellow
     Puan: 1000
     isBuy: 0
@@ -3285,7 +3285,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1153926569}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 270072708}
+        m_TargetAssemblyTypeName: CustomManager, Assembly-CSharp
+        m_MethodName: ItemBuy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1153926569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3965,7 +3977,7 @@ GameObject:
   - component: {fileID: 1373637298}
   - component: {fileID: 1373637297}
   m_Layer: 5
-  m_Name: ButtomPanel
+  m_Name: ButtonPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4473,7 +4485,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.05
+  m_fontSize: 78
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4483,8 +4495,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 10
-  m_wordSpacing: 10
+  m_characterSpacing: 0
+  m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -5186,7 +5198,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1631437023}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 270072708}
+        m_TargetAssemblyTypeName: CustomManager, Assembly-CSharp
+        m_MethodName: ItemSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1631437023
 MonoBehaviour:
   m_ObjectHideFlags: 0
