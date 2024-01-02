@@ -15,7 +15,7 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         memoryManager.ControlAndDefine();
-        //dataManager.FirstCreateSave(itemInformations);//tüm itemler bitince aktifleştir
+        dataManager.FirstCreateSave(itemInformations);
     }
     public void SceneLoad(int index)
     {

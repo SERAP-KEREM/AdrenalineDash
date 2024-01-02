@@ -286,15 +286,12 @@ namespace SerapKerem
             {
                 PlayerPrefs.SetInt("EndLevel", 5);
                 PlayerPrefs.SetInt("Puan", 0);
+                PlayerPrefs.SetInt("ActiveHat", -1);
+                PlayerPrefs.SetInt("ActiveStick",-1);
+                PlayerPrefs.SetInt("ActiveTheme", -1);
             }
         }
     }
-
-    public class AllData
-    {
-        public static List<ItemInformations> itemnfo = new List<ItemInformations>();
-    }
-
 
     [Serializable]
     public class ItemInformations
@@ -312,7 +309,7 @@ namespace SerapKerem
         public void Save(List<ItemInformations> itemInformations)
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = File.Create(Application.persistentDataPath + "/ItemData.gd");//
+            FileStream fileStream = File.Create(Application.persistentDataPath + "/ItemData.gd");
             binaryFormatter.Serialize(fileStream, itemInformations);
             fileStream.Close();
 

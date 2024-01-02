@@ -30,7 +30,6 @@ public class CustomManager : MonoBehaviour
 
     [Header("----------------Sticks")]
     public TextMeshProUGUI StickText;
-
     public GameObject[] Sticks;
     public Button[] StickButtonList;
 
@@ -52,17 +51,14 @@ public class CustomManager : MonoBehaviour
 
     [Header("---------------GENERATION OBJECTS")]
     public List<ItemInformations> itemInformations = new List<ItemInformations>();
+
+    public Animator SavedInformation;
     void Start()
     {
         ////////    C:/Users/serap/AppData/LocalLow/DefaultCompany/AdrenalineDash
         // Debug.Log(Application.persistentDataPath);
 
-
-
-        memoryManager.SaveData_Int("ActiveHat", -1);
-        memoryManager.SaveData_Int("ActiveStick", -1);
-        memoryManager.SaveData_Int("ActiveTheme", -1);
-          memoryManager.SaveData_Int("Puan", 6300);
+        memoryManager.SaveData_Int("Puan", 6300);
         PuanText.text = memoryManager.LoadData_Int("Puan").ToString();
 
 
@@ -71,7 +67,9 @@ public class CustomManager : MonoBehaviour
         dataManager.Load();
         itemInformations = dataManager.ExportList();
 
-
+        CheckTheStatus(0, true);
+        CheckTheStatus(1, true);
+        CheckTheStatus(2, true);
     }
 
     void CheckTheStatus(int chapter, bool operation = false)
@@ -100,8 +98,18 @@ public class CustomManager : MonoBehaviour
             }
             else
             {
+                foreach (var item in Hats)
+                {
+                    item.gameObject.SetActive(false);
+
+                }
                 HatIndex = memoryManager.LoadData_Int("ActiveHat");
                 Hats[HatIndex].gameObject.SetActive(true);
+
+                HatText.text = itemInformations[HatIndex].ItemName;
+                OperationButtons[0].interactable = false;
+                OperationButtons[1].interactable = true;
+                BuyButtonText.text = "Buy";
             }
             #endregion hat start
         }
@@ -126,8 +134,18 @@ public class CustomManager : MonoBehaviour
             }
             else
             {
+                foreach (var item in Sticks)
+                {
+                    item.gameObject.SetActive(false);
+
+                }
                 StickIndex = memoryManager.LoadData_Int("ActiveStick");
                 Sticks[StickIndex].gameObject.SetActive(true);
+
+                StickText.text = itemInformations[StickIndex + 9].ItemName;
+                OperationButtons[0].interactable = false;
+                OperationButtons[1].interactable = true;
+                BuyButtonText.text = "Buy";
             }
             #endregion stick start
         }
@@ -155,6 +173,11 @@ public class CustomManager : MonoBehaviour
 
                 ChangeMaterial(CharacterMaterials[MaterialIndex]);
 
+                MaterialText.text = itemInformations[MaterialIndex + 14].ItemName;
+                OperationButtons[0].interactable = false;
+                OperationButtons[1].interactable = true;
+                BuyButtonText.text = "Buy";
+
             }
             #endregion thema
         }
@@ -173,36 +196,17 @@ public class CustomManager : MonoBehaviour
             {
                 case 0:
                     Debug.Log("Chapter no : " + activeItemPanelIndex + "Item Index" + HatIndex + " Item Ad : " + itemInformations[HatIndex].ItemName);
-
-                    itemInformations[HatIndex].isBuy = true;
-                    memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") - itemInformations[HatIndex].Puan);
-                    BuyButtonText.text = "Buy";
-                    OperationButtons[0].interactable = false;
-                    OperationButtons[1].interactable = true;
-                    PuanText.text = memoryManager.LoadData_Int("Puan").ToString();
-
+                    BuyResult(HatIndex);
                     break;
                 case 1:
-
                     Debug.Log("Chapter no : " + activeItemPanelIndex + "Item Index" + StickIndex + "Item Ad: " + itemInformations[StickIndex + 9].ItemName);
-
-                    itemInformations[StickIndex + 9].isBuy = true;
-                    memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") - itemInformations[StickIndex].Puan);
-                    BuyButtonText.text = "Buy";
-                    OperationButtons[0].interactable = false;
-                    OperationButtons[1].interactable = true;
-                    PuanText.text = memoryManager.LoadData_Int("Puan").ToString();
+                    int index = StickIndex + 9;
+                    BuyResult(index);
                     break;
                 case 2:
-
                     Debug.Log("Chapter no : " + activeItemPanelIndex + "Item Index" + MaterialIndex + "Item Ad: " + itemInformations[MaterialIndex + 14].ItemName);
-
-                    itemInformations[MaterialIndex + 14].isBuy = true;
-                    memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") - itemInformations[MaterialIndex].Puan);
-                    BuyButtonText.text = "Buy";
-                    OperationButtons[0].interactable = false;
-                    OperationButtons[1].interactable = true;
-                    PuanText.text = memoryManager.LoadData_Int("Puan").ToString();
+                    int index2 = MaterialIndex + 14;
+                    BuyResult(index2);
                     break;
                 default:
                     Debug.Log("error");
@@ -210,9 +214,28 @@ public class CustomManager : MonoBehaviour
             }
         }
     }
+
     public void ItemSave()
     {
+        if (activeItemPanelIndex != -1)
+        {
+            switch (activeItemPanelIndex)
+            {
+                case 0:
+                    SaveResult("ActiveHat", HatIndex);
+                    break;
+                case 1:
+                    SaveResult("ActiveStick", StickIndex);
 
+                    break;
+                case 2:
+                    SaveResult("ActiveTheme", MaterialIndex);
+                    break;
+                default:
+                    Debug.Log("error");
+                    break;
+            }
+        }
     }
 
     public void HatButtons(string _event)
@@ -298,9 +321,6 @@ public class CustomManager : MonoBehaviour
                             OperationButtons[0].interactable = false;
                         else
                             OperationButtons[0].interactable = true;
-
-
-
                     }
                     else
                     {
@@ -556,8 +576,6 @@ public class CustomManager : MonoBehaviour
                     MaterialText.text = "No Material";
                     BuyButtonText.text = "Buy";
                     OperationButtons[0].interactable = false;
-
-
                 }
             }
             else
@@ -616,4 +634,26 @@ public class CustomManager : MonoBehaviour
         SceneManager.LoadScene(0);
 
     }
+
+    //---------------------------
+    void BuyResult(int index)
+    {
+        //  Debug.Log("Chapter no : " + activeItemPanelIndex + "Item Index" + HatIndex + " Item Ad : " + itemInformations[HatIndex].ItemName);
+        itemInformations[index].isBuy = true;
+        memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") - itemInformations[index].Puan);
+        BuyButtonText.text = "Buy";
+        OperationButtons[0].interactable = false;
+        OperationButtons[1].interactable = true;
+        PuanText.text = memoryManager.LoadData_Int("Puan").ToString();
+    }
+
+    void SaveResult(string key, int index)
+    {
+        memoryManager.SaveData_Int(key, index);
+        OperationButtons[1].interactable = false;
+        if (!SavedInformation.GetBool("ok"))
+            SavedInformation.SetBool("ok", true);
+        // Debug.Log("Chapter no : " + activeItemPanelIndex + "Item Index" + HatIndex + " Item Ad : " + itemInformations[HatIndex].ItemName);
+    }
+
 }

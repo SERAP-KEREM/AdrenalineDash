@@ -929,6 +929,112 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExitPanel: {fileID: 1312379466}
+  itemInformations:
+  - GroupIndex: 1
+    ItemIndex: 0
+    ItemName: Cowboy Hat
+    Puan: 250
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 1
+    ItemName: Crown
+    Puan: 500
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 2
+    ItemName: Magician Hat
+    Puan: 750
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 3
+    ItemName: Miner Hat
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 4
+    ItemName: Pillbox Hat
+    Puan: 1250
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 5
+    ItemName: Police Cap
+    Puan: 1500
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 6
+    ItemName: Shower Cap
+    Puan: 1750
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 7
+    ItemName: Sombrero
+    Puan: 2000
+    isBuy: 0
+  - GroupIndex: 1
+    ItemIndex: 8
+    ItemName: Viking Helmet
+    Puan: 250
+    isBuy: 0
+  - GroupIndex: 2
+    ItemIndex: 0
+    ItemName: Weapon
+    Puan: 300
+    isBuy: 0
+  - GroupIndex: 2
+    ItemIndex: 1
+    ItemName: Stick Weapon
+    Puan: 600
+    isBuy: 0
+  - GroupIndex: 2
+    ItemIndex: 2
+    ItemName: Old Weapon
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 2
+    ItemIndex: 3
+    ItemName: Katana
+    Puan: 1200
+    isBuy: 0
+  - GroupIndex: 2
+    ItemIndex: 4
+    ItemName: Sword
+    Puan: 1500
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 0
+    ItemName: Almond
+    Puan: 500
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 1
+    ItemName: Blue
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 2
+    ItemName: Green
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 3
+    ItemName: Orange
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 4
+    ItemName: Purple
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 5
+    ItemName: Red
+    Puan: 1000
+    isBuy: 0
+  - GroupIndex: 3
+    ItemIndex: 6
+    ItemName: Yellow
+    Puan: 1000
+    isBuy: 0
 --- !u!1 &558715780
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using SerapKerem;
 using UnityEngine.TextCore.Text;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,14 +20,34 @@ public class GameManager : MonoBehaviour
     public int EnemyCount;
     public GameObject MainCharacter;
     public bool isFinishGame;
-     bool isFinish;
+    bool isFinish;
 
-    MathematicalOperations mathematicalOperations =new MathematicalOperations();
+    MathematicalOperations mathematicalOperations = new MathematicalOperations();
     MemoryManager memoryManager = new MemoryManager();
+
+    [Header("----------------Hats")]
+    public GameObject[] Hats;
+
+    [Header("----------------Sticks")]
+    public GameObject[] Sticks;
+
+    [Header("----------------Character Materials")]
+    public Material[] CharacterMaterials;
+    public Material FirstMaterials;
+    public SkinnedMeshRenderer[] meshRenderer;
+
+    Scene scene;
+
+    private void Awake()
+    {
+        CheckTheItems();
+    }
+
     private void Start()
     {
         EnemyMakes();
-       Debug.Log(memoryManager.LoadData_Int("Puan"));
+        Debug.Log(memoryManager.LoadData_Int("Puan"));
+        scene = SceneManager.GetActiveScene();
     }
 
     public void EnemyMakes()
@@ -38,14 +60,15 @@ public class GameManager : MonoBehaviour
 
     public void EnemiesAttack()
     {
-        foreach (var enemy in Enemies) {
+        foreach (var enemy in Enemies)
+        {
             if (enemy.activeInHierarchy)
             {
                 enemy.GetComponent<Enemy>().AnimPlay();
 
             }
         }
-        isFinish= true;
+        isFinish = true;
         WarEvent();
     }
     private void Update()
@@ -71,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     void WarEvent()
     {
-        if(isFinish)
+        if (isFinish)
         {
             if (ActiveCharacterCount == 1 || EnemyCount == 0)
             {
@@ -98,19 +121,28 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    if(ActiveCharacterCount>5)
-                        memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan")+600);
+                    if (ActiveCharacterCount > 5)
+                    {
+                        if (scene.buildIndex == memoryManager.LoadData_Int("EndLevel"))
+                        {
+                            memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") + 600);
+                            memoryManager.SaveData_Int("EndLevel", memoryManager.LoadData_Int("EndLevel") + 1);
+                        }
+
+                    }
                     else
-                        memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") + 200);
-                    memoryManager.SaveData_Int("EndLevel", memoryManager.LoadData_Int("EndLevel")+1);
-
-
+                    {
+                        if (scene.buildIndex == memoryManager.LoadData_Int("EndLevel"))
+                        {
+                            memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") + 200);
+                            memoryManager.SaveData_Int("EndLevel", memoryManager.LoadData_Int("EndLevel") + 1);
+                        }
+                    }
+                    Debug.Log("Kazandın");
                 }
             }
-           
-        }
-     
 
+        }
     }
     public void ManManager(string islemTuru, int numObj, Transform pos)
     {
@@ -134,7 +166,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DestroyEffectMakes(Vector3 pos, bool isBalyoz = false,bool CharacterEvent=false)
+    public void DestroyEffectMakes(Vector3 pos, bool isBalyoz = false, bool CharacterEvent = false)
     {
         foreach (var item in DestroyEffects)
         {
@@ -147,7 +179,7 @@ public class GameManager : MonoBehaviour
                 item.GetComponent<AudioSource>().Play();
 
                 if (!CharacterEvent)
-                   ActiveCharacterCount--;
+                    ActiveCharacterCount--;
                 else
                     EnemyCount--;
                 break;
@@ -169,11 +201,32 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(!isFinishGame)
+        if (!isFinishGame)
         {
             WarEvent();
 
         }
+    }
+
+    public void CheckTheItems()
+    {
+        if (memoryManager.LoadData_Int("ActiveHat") != -1)
+            Hats[memoryManager.LoadData_Int("ActiveHat")].SetActive(true);
+        if (memoryManager.LoadData_Int("ActiveStick") != -1)
+            Sticks[memoryManager.LoadData_Int("ActiveStick")].SetActive(true);
+        if (memoryManager.LoadData_Int("ActiveTheme") != -1)
+            ChangeMaterial(CharacterMaterials[memoryManager.LoadData_Int("ActiveTheme")]);
+        else
+            ChangeMaterial(FirstMaterials);
+
+    }
+    void ChangeMaterial(Material index)
+    {
+        Material[] mats = meshRenderer[0].materials;
+        mats[0] = index;
+        meshRenderer[0].materials = mats;
+        meshRenderer[1].materials = mats;
+        meshRenderer[2].materials = mats;
     }
 
 }
