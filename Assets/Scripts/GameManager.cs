@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Destroy(GameObject.FindWithTag("MenuMusic"));
         CheckTheItems();
     }
 

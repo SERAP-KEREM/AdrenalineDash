@@ -10,8 +10,9 @@ public class MainMenuManager : MonoBehaviour
     DataManager dataManager=new DataManager();  
     public GameObject ExitPanel;
 
-
     public List<ItemInformations> itemInformations = new List<ItemInformations>();
+    public AudioSource ButtonAudio;
+
     private void Start()
     {
         memoryManager.ControlAndDefine();
@@ -19,19 +20,23 @@ public class MainMenuManager : MonoBehaviour
     }
     public void SceneLoad(int index)
     {
+        ButtonAudio.Play();
         SceneManager.LoadScene(index);
 
     }
 
     public void Play()
     {
+        ButtonAudio.Play();
        SceneManager.LoadScene(memoryManager.LoadData_Int("EndLevel"));
         
     }
   
     public void ExitButtonProcess(string _event)
     {
-        if(_event=="YES")
+
+        ButtonAudio.Play();
+        if (_event=="YES")
             Application.Quit();
         else if(_event=="EXIT")
             ExitPanel.SetActive(true);

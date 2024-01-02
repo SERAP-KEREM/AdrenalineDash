@@ -13,6 +13,7 @@ public class LevelSelectManager : MonoBehaviour
     public Sprite lockedButtonImage;
     
     MemoryManager memoryManager=new MemoryManager();
+    public AudioSource ButtonAudio;
 
 
     void Start()
@@ -47,11 +48,13 @@ public class LevelSelectManager : MonoBehaviour
 
     public void SceneLoad(int Index)
     {
+        ButtonAudio.Play();
         SceneManager.LoadScene(Index);
         Debug.Log(Index);
     }
     public void PreviousButton()
     {
+        ButtonAudio.Play();
         SceneManager.LoadScene(0);
     }
 }

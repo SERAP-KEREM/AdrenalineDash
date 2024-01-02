@@ -53,6 +53,9 @@ public class CustomManager : MonoBehaviour
     public List<ItemInformations> itemInformations = new List<ItemInformations>();
 
     public Animator SavedInformation;
+
+    public AudioSource[] Sounds;
+
     void Start()
     {
         ////////    C:/Users/serap/AppData/LocalLow/DefaultCompany/AdrenalineDash
@@ -189,6 +192,8 @@ public class CustomManager : MonoBehaviour
 
     public void ItemBuy()
     {
+        Sounds[1].Play();
+
         // Debug.Log(activeItemPanelIndex);
         if (activeItemPanelIndex != -1)
         {
@@ -217,6 +222,8 @@ public class CustomManager : MonoBehaviour
 
     public void ItemSave()
     {
+        Sounds[2].Play();
+
         if (activeItemPanelIndex != -1)
         {
             switch (activeItemPanelIndex)
@@ -240,6 +247,8 @@ public class CustomManager : MonoBehaviour
 
     public void HatButtons(string _event)
     {
+        Sounds[0].Play();
+
         if (_event == "Next")//next button
         {
             if (HatIndex == -1)
@@ -352,6 +361,8 @@ public class CustomManager : MonoBehaviour
     }
     public void StickButtons(string _event)
     {
+        Sounds[0].Play();
+
         if (_event == "Next")//next button
         {
             if (StickIndex == -1)
@@ -470,6 +481,9 @@ public class CustomManager : MonoBehaviour
 
     public void MaterialButtons(string _event)
     {
+        Sounds[0].Play();
+
+
         if (_event == "Next")//next button
         {
             if (MaterialIndex == -1)
@@ -597,6 +611,7 @@ public class CustomManager : MonoBehaviour
 
     public void ItemPanelActive(int Index)
     {
+        Sounds[0].Play();
         CheckTheStatus(Index);
         GeneralPanels[0].SetActive(true);
         activeItemPanelIndex = Index;
@@ -607,6 +622,7 @@ public class CustomManager : MonoBehaviour
 
     public void XButton()
     {
+        Sounds[0].Play();
         BuyButtonText.text = "Buy";
 
         GeneralPanels[0].SetActive(false);
@@ -630,6 +646,7 @@ public class CustomManager : MonoBehaviour
 
     public void ReturnMainMenu()
     {
+        Sounds[0].Play();
         dataManager.Save(itemInformations);
         SceneManager.LoadScene(0);
 

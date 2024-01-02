@@ -18,6 +18,7 @@ TagManager:
   - FinalTrigger
   - Pole
   - FreeCharacter
+  - MenuMusic
   layers:
   - Default
   - TransparentFX
