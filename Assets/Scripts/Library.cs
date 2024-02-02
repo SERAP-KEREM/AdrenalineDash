@@ -289,6 +289,9 @@ namespace SerapKerem
                 PlayerPrefs.SetInt("ActiveHat", -1);
                 PlayerPrefs.SetInt("ActiveStick",-1);
                 PlayerPrefs.SetInt("ActiveTheme", -1);
+                PlayerPrefs.SetFloat("MenuVoice", 1);
+                PlayerPrefs.SetFloat("MenuFX", 1);
+                PlayerPrefs.SetFloat("GameVoice", 1);
             }
         }
     }
