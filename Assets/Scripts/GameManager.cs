@@ -37,11 +37,13 @@ public class GameManager : MonoBehaviour
     public SkinnedMeshRenderer[] meshRenderer;
 
     Scene scene;
-    public AudioSource GameVoice;
+    public AudioSource[] Sources;
+    public GameObject[] ProcessPanels;
 
     private void Awake()
     {
-        GameVoice.volume = memoryManager.LoadData_Float("GameVoice");
+        Sources[0].volume = memoryManager.LoadData_Float("GameVoice");
+        Sources[1].volume = memoryManager.LoadData_Float("MenuFX");
         Destroy(GameObject.FindWithTag("MenuMusic"));
         CheckTheItems();
     }
@@ -223,6 +225,42 @@ public class GameManager : MonoBehaviour
             ChangeMaterial(FirstMaterials);
 
     }
+
+    public void ExitButtonProcess(string _event)
+    {
+
+        Sources[1].Play();
+        Time.timeScale = 0;
+        if (_event == "Stop")
+        {
+            ProcessPanels[0].SetActive(true);
+
+        }
+        else if(_event =="Continue")
+        {
+            ProcessPanels[0].SetActive(false);
+            Time.timeScale = 1;
+        }
+        else if(_event =="Replay")
+        {
+            SceneManager.LoadScene(scene.buildIndex);
+            Time.timeScale = 1;
+
+        }
+        else if(_event =="Home")
+        {
+            SceneManager.LoadScene(0);
+            Time.timeScale = 1;
+
+        }
+
+
+        //else if (_event == "EXIT")
+        //  ExitPanel.SetActive(true);
+        // else
+        //   ExitPanel.SetActive(false);
+
+    }
     void ChangeMaterial(Material index)
     {
         Material[] mats = meshRenderer[0].materials;
@@ -231,6 +269,8 @@ public class GameManager : MonoBehaviour
         meshRenderer[1].materials = mats;
         meshRenderer[2].materials = mats;
     }
+
+
 
 }
 
