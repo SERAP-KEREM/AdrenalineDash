@@ -18,6 +18,7 @@ public class LevelSelectManager : MonoBehaviour
 
     void Start()
     {
+        ButtonAudio.volume = memoryManager.LoadData_Float("MenuFX");
 
        // memoryManager.SaveData_Int("EndLevel", Level);
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SerapKerem;
+using System.Buffers;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -11,16 +13,37 @@ public class SettingsManager : MonoBehaviour
     public Slider MenuVoice;
     public Slider MenuFX;
     public Slider GameVoice;
+    MemoryManager memoryManager = new MemoryManager();
     
     void Start()
     {
-    //    PlayerPrefs.SetFloat("MenuVoice", 1);
-    //    PlayerPrefs.SetFloat("MenuFX", 1);
-    //    PlayerPrefs.SetFloat("GameVoice", 1);
+        ButtonVoice.volume = memoryManager.LoadData_Float("MenuFX");
+
+        MenuVoice.value = memoryManager.LoadData_Float("MenuVoice");
+        MenuFX.value = memoryManager.LoadData_Float("MenuFX");
+        GameVoice.value = memoryManager.LoadData_Float("GameVoice");
+
     }
 
     void Update()
     {
+
+    }
+
+    public void AdjustSound(string sliderName)
+    {
+        switch (sliderName)
+        {
+            case "MenuVoice":
+                memoryManager.SaveData_Float("MenuVoice", MenuVoice.value);
+                break;
+            case "MenuFX":
+                memoryManager.SaveData_Float("MenuFX", MenuFX.value);
+                break;
+            case "GameVoice":
+                 memoryManager.SaveData_Float("GameVoice", GameVoice.value);
+                break;  
+        }
 
     }
     public void PreviousButton()

@@ -212,7 +212,19 @@ MonoBehaviour:
   m_Value: 0.482
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 532651054}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: AdjustSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuFX
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &103634874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,9 +1066,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonVoice: {fileID: 532651053}
-  MenuVoice: {fileID: 0}
-  MenuFX: {fileID: 0}
-  GameVoice: {fileID: 0}
+  MenuVoice: {fileID: 722832958}
+  MenuFX: {fileID: 51112544}
+  GameVoice: {fileID: 1717369181}
 --- !u!1 &538798269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1710,19 @@ MonoBehaviour:
   m_Value: 0.482
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 532651054}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: AdjustSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuVoice
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &750755453
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,7 +3109,19 @@ MonoBehaviour:
   m_Value: 0.482
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 532651054}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: AdjustSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GameVoice
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1743469943
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,12 +12,17 @@ public class MenuSound : MonoBehaviour
     {
         //sound=GetComponent<AudioSource>();
 
-      //  sound.volume = PlayerPrefs.GetFloat("MenuSound");
+        sound.volume = PlayerPrefs.GetFloat("MenuVoice");
         DontDestroyOnLoad(gameObject);
 
         if (instance == null)
             instance = gameObject;
         else
             Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        sound.volume = PlayerPrefs.GetFloat("MenuVoice");
     }
 }

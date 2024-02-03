@@ -37,9 +37,11 @@ public class GameManager : MonoBehaviour
     public SkinnedMeshRenderer[] meshRenderer;
 
     Scene scene;
+    public AudioSource GameVoice;
 
     private void Awake()
     {
+        GameVoice.volume = memoryManager.LoadData_Float("GameVoice");
         Destroy(GameObject.FindWithTag("MenuMusic"));
         CheckTheItems();
     }

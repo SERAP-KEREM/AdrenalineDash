@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using SerapKerem;
+using Unity.VisualScripting;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MainMenuManager : MonoBehaviour
     {
         memoryManager.ControlAndDefine();
         dataManager.FirstCreateSave(itemInformations);
+        ButtonAudio.volume = memoryManager.LoadData_Float("MenuFX");
+
     }
     public void SceneLoad(int index)
     {
@@ -44,4 +47,7 @@ public class MainMenuManager : MonoBehaviour
             ExitPanel.SetActive(false);
 
     }
+
+
+  
 }

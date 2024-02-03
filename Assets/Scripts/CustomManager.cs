@@ -73,6 +73,11 @@ public class CustomManager : MonoBehaviour
         CheckTheStatus(0, true);
         CheckTheStatus(1, true);
         CheckTheStatus(2, true);
+
+        foreach (var item in Sounds)
+        {
+            item.volume = memoryManager.LoadData_Float("MenuFX");
+        }
     }
 
     void CheckTheStatus(int chapter, bool operation = false)
