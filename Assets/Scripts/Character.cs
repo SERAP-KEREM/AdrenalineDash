@@ -42,8 +42,9 @@ public class Character : MonoBehaviour
         {
             float fark = Vector3.Distance(transform.position, TransitPoint.transform.position);
             slider.value = fark;    
-
-            if (Input.GetKey(KeyCode.Mouse0))
+           if(Time.timeScale!=0)
+            {
+ if (Input.GetKey(KeyCode.Mouse0))
             {
                 if (Input.GetAxis("Mouse X") < 0)
                 {
@@ -55,6 +56,8 @@ public class Character : MonoBehaviour
                 }
 
             }
+            }
+           
         }
         
     }

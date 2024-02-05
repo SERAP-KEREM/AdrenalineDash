@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SerapKerem;
 using UnityEngine.TextCore.Text;
 using TMPro;
@@ -37,12 +38,16 @@ public class GameManager : MonoBehaviour
     public SkinnedMeshRenderer[] meshRenderer;
 
     Scene scene;
+
+    [Header("----------------General Data")]
     public AudioSource[] Sources;
     public GameObject[] ProcessPanels;
+    public Slider gameVolumeSetting;
 
     private void Awake()
     {
         Sources[0].volume = memoryManager.LoadData_Float("GameVoice");
+        gameVolumeSetting.value = memoryManager.LoadData_Float("GameVoice");
         Sources[1].volume = memoryManager.LoadData_Float("MenuFX");
         Destroy(GameObject.FindWithTag("MenuMusic"));
         CheckTheItems();
@@ -261,6 +266,27 @@ public class GameManager : MonoBehaviour
         //   ExitPanel.SetActive(false);
 
     }
+    public void Settings(string _event)
+    {
+        if(_event =="setting")
+        {
+            ProcessPanels[1].SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            ProcessPanels[1].SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
+    public void AdjustVolume()
+    {
+        memoryManager.SaveData_Float("GameVoice", gameVolumeSetting.value);
+        Sources[0].volume = gameVolumeSetting.value;
+       
+    }
+
     void ChangeMaterial(Material index)
     {
         Material[] mats = meshRenderer[0].materials;
@@ -270,8 +296,4 @@ public class GameManager : MonoBehaviour
         meshRenderer[2].materials = mats;
     }
 
-
-
 }
-
-
