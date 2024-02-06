@@ -292,6 +292,7 @@ namespace SerapKerem
                 PlayerPrefs.SetFloat("MenuVoice", 1);
                 PlayerPrefs.SetFloat("MenuFX", 1);
                 PlayerPrefs.SetFloat("GameVoice", 1);
+                PlayerPrefs.SetString("Language", "TR");
             }
         }
     }
@@ -357,4 +358,23 @@ namespace SerapKerem
 
         }
     }
+
+    //----------------LANGUAGE MANAGEMENT  
+
+    [Serializable]
+    public class LanguageDataMainObject
+    {
+        public int SectionIndex;
+        public List<LanguageData_TR> languageData_TR=new List<LanguageData_TR>();
+        public List<LanguageData_TR> languageData_EN=new List<LanguageData_TR>();
+      
+    }
+
+    [Serializable]
+    public class LanguageData_TR
+    {
+        public string _text;
+    }
+  
+
 }

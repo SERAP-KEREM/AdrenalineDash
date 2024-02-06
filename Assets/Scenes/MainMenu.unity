@@ -903,6 +903,38 @@ MonoBehaviour:
     Puan: 1000
     isBuy: 0
   ButtonAudio: {fileID: 532651054}
+  languageDataMainObject:
+  - SectionIndex: 0
+    languageData_TR:
+    - _text: OYNA
+    - _text: "\xD6ZELLE\u015ET\u0130R"
+    - _text: "LEVEL SE\xC7"
+    - _text: MARKET
+    - _text: AYARLAR
+    - _text: "\xC7IKI\u015E"
+    - _text: "EM\u0130N M\u0130S\u0130N\u0130Z"
+    - _text: HAYIR
+    - _text: EVET
+    languageData_EN:
+    - _text: PLAY
+    - _text: CUSTOMIZE
+    - _text: SELECT LEVEL
+    - _text: SHOP
+    - _text: SETTINGS
+    - _text: QUIT
+    - _text: ARE YOU SURE
+    - _text: NO
+    - _text: YES
+  TextObjects:
+  - {fileID: 71549409}
+  - {fileID: 25786090}
+  - {fileID: 260396513}
+  - {fileID: 1041503702}
+  - {fileID: 1008650147}
+  - {fileID: 1888875036}
+  - {fileID: 4541102582003926564}
+  - {fileID: 5510473829392042974}
+  - {fileID: 4801395086893875074}
 --- !u!82 &532651054
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1499,7 +1531,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Market
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
