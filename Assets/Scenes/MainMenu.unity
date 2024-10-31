@@ -925,6 +925,59 @@ MonoBehaviour:
     - _text: ARE YOU SURE
     - _text: NO
     - _text: YES
+  - SectionIndex: 0
+    languageData_TR:
+    - _text: "\u015EAPKA"
+    - _text: SOPA
+    - _text: TEMA
+    - _text: "GER\u0130 D\xD6N"
+    - _text: "\u0130TEM YOK"
+    - _text: SATIN AL
+    - _text: KAYDET
+    languageData_EN:
+    - _text: HAT
+    - _text: BAT
+    - _text: THEME
+    - _text: TURN BACK
+    - _text: NO ITEM
+    - _text: BUY
+    - _text: SAVE
+  - SectionIndex: 0
+    languageData_TR:
+    - _text: "LEVEL SE\xC7"
+    languageData_EN:
+    - _text: SELECT LEVEL
+  - SectionIndex: 0
+    languageData_TR:
+    - _text: "ALI\u015EVER\u0130\u015E"
+    languageData_EN:
+    - _text: SHOPPING
+  - SectionIndex: 0
+    languageData_TR:
+    - _text: AYARLAR
+    - _text: "MEN\xDC SES\u0130"
+    - _text: "MEN\xDC FX"
+    - _text: "OYUN SES\u0130"
+    - _text: "D\u0130L"
+    languageData_EN:
+    - _text: SETTINGS
+    - _text: MENU SOUND
+    - _text: MENU FX
+    - _text: GAME SOUND
+    - _text: LANGUAGE
+  - SectionIndex: 0
+    languageData_TR:
+    - _text: AYARLAR
+    - _text: "OYUN SES\u0130"
+    - _text: OYUN DURAKLATILDI
+    - _text: KAZANDIN
+    - _text: "KAYBETT\u0130N"
+    languageData_EN:
+    - _text: SETTINGS
+    - _text: GAME SOUND
+    - _text: GAME PAUSED
+    - _text: YOU WIN
+    - _text: YOU LOSE
   TextObjects:
   - {fileID: 71549409}
   - {fileID: 25786090}
