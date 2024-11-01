@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 using UnityEngine.TextCore.Text;
 using System;
 using System.IO;
@@ -344,7 +343,7 @@ namespace SerapKerem
         }
 
 
-        public void FirstCreateSave(List<ItemInformations> itemInformations)
+        public void FirstCreateSave(List<ItemInformations> itemInformations, List<LanguageDataMainObject> languageData)
         {
             if (!File.Exists(Application.persistentDataPath + "/ItemData.gd"))
             {
@@ -354,9 +353,43 @@ namespace SerapKerem
                 fileStream.Close();
 
             }
+            if (!File.Exists(Application.persistentDataPath + "/LanguageData.gd"))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream fileStream = File.Create(Application.persistentDataPath + "/LanguageData.gd");
+                binaryFormatter.Serialize(fileStream, languageData);
+                fileStream.Close();
+
+            }
 
 
         }
+
+        //--------------------------
+        List<LanguageDataMainObject> _languageDataInternalList;
+
+        public void LanguageLoad()
+        {
+            if (File.Exists(Application.persistentDataPath + "/LanguageData.gd"))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream fileStream = File.Open(Application.persistentDataPath + "/LanguageData.gd", FileMode.Open);
+                _languageDataInternalList = (List<LanguageDataMainObject>)binaryFormatter.Deserialize(fileStream);
+                fileStream.Close();
+
+            }
+            else
+            {
+                Debug.LogError("No File");
+            }
+        }
+
+        public List<LanguageDataMainObject> LanguageExportList()
+        {
+            return _languageDataInternalList;
+        }
+
+
     }
 
     //----------------LANGUAGE MANAGEMENT  

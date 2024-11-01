@@ -13,18 +13,25 @@ public class MainMenuManager : MonoBehaviour
     DataManager dataManager=new DataManager();  
     public GameObject ExitPanel;
 
-    public List<ItemInformations> itemInformations = new List<ItemInformations>();
+    public List<ItemInformations> default_ItemInformations = new List<ItemInformations>();
+    public List<LanguageDataMainObject> default_LanguageData = new List<LanguageDataMainObject>();
     public AudioSource ButtonAudio;
 
     public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
+    List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
     public TextMeshProUGUI[] TextObjects;
 
     private void Start()
     {
         memoryManager.ControlAndDefine();
-        dataManager.FirstCreateSave(itemInformations);
+        dataManager.FirstCreateSave(default_ItemInformations, default_LanguageData);
         ButtonAudio.volume = memoryManager.LoadData_Float("MenuFX");
-        memoryManager.SaveData_String("Language", "EN");
+      //   memoryManager.SaveData_String("Language", "TR");
+
+        dataManager.LanguageLoad();
+        languageReadData = dataManager.LanguageExportList();
+        languageDataMainObject.Add(languageReadData[0]);
+
         LanguageChoiceManagement();
 
     }
