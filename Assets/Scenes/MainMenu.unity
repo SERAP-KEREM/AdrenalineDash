@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExitPanel: {fileID: 8031554236547506197}
-  itemInformations:
+  default_ItemInformations:
   - GroupIndex: 1
     ItemIndex: 0
     ItemName: Cowboy Hat
@@ -902,8 +902,7 @@ MonoBehaviour:
     ItemName: Yellow
     Puan: 1000
     isBuy: 0
-  ButtonAudio: {fileID: 532651054}
-  languageDataMainObject:
+  default_LanguageData:
   - SectionIndex: 0
     languageData_TR:
     - _text: OYNA
@@ -978,6 +977,8 @@ MonoBehaviour:
     - _text: GAME PAUSED
     - _text: YOU WIN
     - _text: YOU LOSE
+  ButtonAudio: {fileID: 532651054}
+  languageDataMainObject: []
   TextObjects:
   - {fileID: 71549409}
   - {fileID: 25786090}
