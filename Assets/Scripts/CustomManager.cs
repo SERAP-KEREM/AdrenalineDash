@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.TextCore.Text;
-using static UnityEditor.Progress;
 using UnityEngine.SceneManagement;
 
 public class CustomManager : MonoBehaviour
@@ -49,12 +48,14 @@ public class CustomManager : MonoBehaviour
     MemoryManager memoryManager = new MemoryManager();
     DataManager dataManager = new DataManager();
 
-    [Header("---------------GENERATION OBJECTS")]
-    public List<ItemInformations> itemInformations = new List<ItemInformations>();
-
+    [Header("---------------GENERATION OBJECTS")] 
     public Animator SavedInformation;
-
     public AudioSource[] Sounds;
+    public List<ItemInformations> itemInformations = new List<ItemInformations>();
+    public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
+    List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
+
+    public TextMeshProUGUI[] TextObjects;
 
     void Start()
     {
@@ -78,8 +79,33 @@ public class CustomManager : MonoBehaviour
         {
             item.volume = memoryManager.LoadData_Float("MenuFX");
         }
+        dataManager.LanguageLoad();
+        languageReadData = dataManager.LanguageExportList();
+        languageDataMainObject.Add(languageReadData[0]);
+
+        LanguageChoiceManagement();
+
     }
 
+    public void LanguageChoiceManagement()
+    {
+        if (memoryManager.LoadData_String("Language") == "TR")
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = languageDataMainObject[0].languageData_TR[i]._text;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = languageDataMainObject[0].languageData_EN[i]._text;
+            }
+        }
+
+
+    }
     void CheckTheStatus(int chapter, bool operation = false)
     {
         if (chapter == 0)
