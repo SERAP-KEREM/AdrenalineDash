@@ -56,6 +56,8 @@ public class CustomManager : MonoBehaviour
     List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
 
     public TextMeshProUGUI[] TextObjects;
+    string buyText;
+    string itemText;
 
     void Start()
     {
@@ -81,7 +83,7 @@ public class CustomManager : MonoBehaviour
         }
         dataManager.LanguageLoad();
         languageReadData = dataManager.LanguageExportList();
-        languageDataMainObject.Add(languageReadData[0]);
+        languageDataMainObject.Add(languageReadData[1]);
 
         LanguageChoiceManagement();
 
@@ -95,6 +97,8 @@ public class CustomManager : MonoBehaviour
             {
                 TextObjects[i].text = languageDataMainObject[0].languageData_TR[i]._text;
             }
+            buyText= languageDataMainObject[0].languageData_TR[5]._text;
+            itemText= languageDataMainObject[0].languageData_TR[4]._text;
         }
         else
         {
@@ -102,6 +106,8 @@ public class CustomManager : MonoBehaviour
             {
                 TextObjects[i].text = languageDataMainObject[0].languageData_EN[i]._text;
             }
+            buyText = languageDataMainObject[0].languageData_EN[5]._text;
+            itemText = languageDataMainObject[0].languageData_EN[4]._text;
         }
 
 
@@ -121,12 +127,12 @@ public class CustomManager : MonoBehaviour
 
                 OperationButtons[0].interactable = false;
                 OperationButtons[1].interactable = false;
-                BuyButtonText.text = "Buy";
+                BuyButtonText.text = buyText;
                 if (!operation)
                 {
 
                     HatIndex = -1;
-                    HatText.text = "No Hat";
+                    HatText.text = itemText;
                 }
 
             }
@@ -143,7 +149,7 @@ public class CustomManager : MonoBehaviour
                 HatText.text = itemInformations[HatIndex].ItemName;
                 OperationButtons[0].interactable = false;
                 OperationButtons[1].interactable = true;
-                BuyButtonText.text = "Buy";
+                BuyButtonText.text = buyText;
             }
             #endregion hat start
         }
@@ -163,7 +169,7 @@ public class CustomManager : MonoBehaviour
                 if (!operation)
                 {
                     StickIndex = -1;
-                    StickText.text = "No Stick";
+                    StickText.text = itemText;
                 }
             }
             else
@@ -179,7 +185,7 @@ public class CustomManager : MonoBehaviour
                 StickText.text = itemInformations[StickIndex + 9].ItemName;
                 OperationButtons[0].interactable = false;
                 OperationButtons[1].interactable = true;
-                BuyButtonText.text = "Buy";
+                BuyButtonText.text = buyText;
             }
             #endregion stick start
         }
@@ -191,7 +197,7 @@ public class CustomManager : MonoBehaviour
                 if (!operation)
                 {
                     MaterialIndex = -1;
-                    MaterialText.text = "No Material";
+                    MaterialText.text = itemText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = false;
                 }
@@ -210,7 +216,7 @@ public class CustomManager : MonoBehaviour
                 MaterialText.text = itemInformations[MaterialIndex + 14].ItemName;
                 OperationButtons[0].interactable = false;
                 OperationButtons[1].interactable = true;
-                BuyButtonText.text = "Buy";
+                BuyButtonText.text = buyText;
 
             }
             #endregion thema
@@ -290,7 +296,7 @@ public class CustomManager : MonoBehaviour
 
                 if (!itemInformations[HatIndex].isBuy)
                 {
-                    BuyButtonText.text = itemInformations[HatIndex].Puan + " - Buy";
+                    BuyButtonText.text = itemInformations[HatIndex].Puan + " - "+ buyText;
                     OperationButtons[1].interactable = false;
 
                     if (memoryManager.LoadData_Int("Puan") < itemInformations[HatIndex].Puan)
@@ -300,7 +306,7 @@ public class CustomManager : MonoBehaviour
                 }
                 else
                 {
-                    BuyButtonText.text = "Buy";
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = true;
                 }
@@ -314,7 +320,7 @@ public class CustomManager : MonoBehaviour
 
                 if (!itemInformations[HatIndex].isBuy)
                 {
-                    BuyButtonText.text = itemInformations[HatIndex].Puan + " - Buy";
+                    BuyButtonText.text = itemInformations[HatIndex].Puan + " - " + buyText;
                     OperationButtons[1].interactable = false;
 
                     if (memoryManager.LoadData_Int("Puan") < itemInformations[HatIndex].Puan)
@@ -324,7 +330,7 @@ public class CustomManager : MonoBehaviour
                 }
                 else
                 {
-                    BuyButtonText.text = "Buy";
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = true;
                 }
@@ -354,7 +360,7 @@ public class CustomManager : MonoBehaviour
 
                     if (!itemInformations[HatIndex].isBuy)
                     {
-                        BuyButtonText.text = itemInformations[HatIndex].Puan + " - Buy";
+                        BuyButtonText.text = itemInformations[HatIndex].Puan + " - " + buyText;
                         OperationButtons[1].interactable = false;
 
                         if (memoryManager.LoadData_Int("Puan") < itemInformations[HatIndex].Puan)
@@ -364,7 +370,7 @@ public class CustomManager : MonoBehaviour
                     }
                     else
                     {
-                        BuyButtonText.text = "Buy";
+                        BuyButtonText.text = buyText;
                         OperationButtons[0].interactable = false;
                         OperationButtons[1].interactable = true;
                     }
@@ -373,15 +379,15 @@ public class CustomManager : MonoBehaviour
                 else
                 {
                     HatButtonList[0].interactable = false;
-                    HatText.text = "No Hat";
-                    BuyButtonText.text = "Buy";
+                    HatText.text = itemText;
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                 }
             }
             else
             {
                 HatButtonList[0].interactable = false;
-                HatText.text = "No Hat";
+                HatText.text = itemText;
 
             }
             //--------------
@@ -404,7 +410,7 @@ public class CustomManager : MonoBehaviour
 
                 if (!itemInformations[StickIndex + 9].isBuy)
                 {
-                    BuyButtonText.text = itemInformations[StickIndex + 9].Puan + " - Buy";
+                    BuyButtonText.text = itemInformations[StickIndex + 9].Puan + " - " + buyText;
                     OperationButtons[1].interactable = false;
 
                     if (memoryManager.LoadData_Int("Puan") < itemInformations[StickIndex + 9].Puan)
@@ -414,7 +420,7 @@ public class CustomManager : MonoBehaviour
                 }
                 else
                 {
-                    BuyButtonText.text = "Buy";
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = true;
                 }
@@ -429,7 +435,7 @@ public class CustomManager : MonoBehaviour
 
                 if (!itemInformations[StickIndex + 9].isBuy)
                 {
-                    BuyButtonText.text = itemInformations[StickIndex + 9].Puan + " - Buy";
+                    BuyButtonText.text = itemInformations[StickIndex + 9].Puan + " - " + buyText;
                     OperationButtons[1].interactable = false;
 
                     if (memoryManager.LoadData_Int("Puan") < itemInformations[StickIndex + 9].Puan)
@@ -439,7 +445,7 @@ public class CustomManager : MonoBehaviour
                 }
                 else
                 {
-                    BuyButtonText.text = "Buy";
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = true;
 
@@ -471,7 +477,7 @@ public class CustomManager : MonoBehaviour
                     //*
                     if (!itemInformations[StickIndex + 9].isBuy)
                     {
-                        BuyButtonText.text = itemInformations[StickIndex + 9].Puan + " - Buy";
+                        BuyButtonText.text = itemInformations[StickIndex + 9].Puan + " - " + buyText;
                         OperationButtons[1].interactable = false;
 
                         if (memoryManager.LoadData_Int("Puan") < itemInformations[StickIndex + 9].Puan)
@@ -481,7 +487,7 @@ public class CustomManager : MonoBehaviour
                     }
                     else
                     {
-                        BuyButtonText.text = "Buy";
+                        BuyButtonText.text = buyText;
                         OperationButtons[0].interactable = false;
                         OperationButtons[1].interactable = true;
                     }
@@ -490,8 +496,8 @@ public class CustomManager : MonoBehaviour
                 else
                 {
                     StickButtonList[0].interactable = false;
-                    StickText.text = "No Stick";
-                    BuyButtonText.text = "Buy";
+                    StickText.text = itemText;
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
 
 
@@ -500,7 +506,7 @@ public class CustomManager : MonoBehaviour
             else
             {
                 StickButtonList[0].interactable = false;
-                StickText.text = "No Stick";
+                StickText.text = itemText;
 
             }
             //--------------
@@ -528,7 +534,7 @@ public class CustomManager : MonoBehaviour
                 //*
                 if (!itemInformations[MaterialIndex + 14].isBuy)
                 {
-                    BuyButtonText.text = itemInformations[MaterialIndex + 14].Puan + " - Buy";
+                    BuyButtonText.text = itemInformations[MaterialIndex + 14].Puan + " - " + buyText;
                     OperationButtons[1].interactable = false;
 
                     if (memoryManager.LoadData_Int("Puan") < itemInformations[MaterialIndex + 14].Puan)
@@ -538,7 +544,7 @@ public class CustomManager : MonoBehaviour
                 }
                 else
                 {
-                    BuyButtonText.text = "Buy";
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = true;
                 }
@@ -554,7 +560,7 @@ public class CustomManager : MonoBehaviour
                 //*
                 if (!itemInformations[MaterialIndex + 14].isBuy)
                 {
-                    BuyButtonText.text = itemInformations[MaterialIndex + 14].Puan + " - Buy";
+                    BuyButtonText.text = itemInformations[MaterialIndex + 14].Puan + " - " + buyText;
                     OperationButtons[1].interactable = false;
 
                     if (memoryManager.LoadData_Int("Puan") < itemInformations[MaterialIndex + 14].Puan)
@@ -564,7 +570,7 @@ public class CustomManager : MonoBehaviour
                 }
                 else
                 {
-                    BuyButtonText.text = "Buy";
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                     OperationButtons[1].interactable = true;
                 }
@@ -597,7 +603,7 @@ public class CustomManager : MonoBehaviour
                     //*
                     if (!itemInformations[MaterialIndex + 14].isBuy)
                     {
-                        BuyButtonText.text = itemInformations[MaterialIndex + 14].Puan + " - Buy";
+                        BuyButtonText.text = itemInformations[MaterialIndex + 14].Puan + " - " + buyText;
                         OperationButtons[1].interactable = false;
 
                         if (memoryManager.LoadData_Int("Puan") < itemInformations[MaterialIndex + 14].Puan)
@@ -607,7 +613,7 @@ public class CustomManager : MonoBehaviour
                     }
                     else
                     {
-                        BuyButtonText.text = "Buy";
+                        BuyButtonText.text = buyText;
                         OperationButtons[0].interactable = false;
                         OperationButtons[1].interactable = true;
                     }
@@ -618,8 +624,8 @@ public class CustomManager : MonoBehaviour
 
                     ChangeMaterial(FirstMaterials);
                     CharacterButtonList[0].interactable = false;
-                    MaterialText.text = "No Material";
-                    BuyButtonText.text = "Buy";
+                    MaterialText.text = itemText;
+                    BuyButtonText.text = buyText;
                     OperationButtons[0].interactable = false;
                 }
             }
@@ -628,8 +634,8 @@ public class CustomManager : MonoBehaviour
 
                 ChangeMaterial(FirstMaterials);
                 CharacterButtonList[0].interactable = false;
-                MaterialText.text = "No Material";
-                BuyButtonText.text = "Buy";
+                MaterialText.text = itemText;
+                BuyButtonText.text = buyText;
                 OperationButtons[0].interactable = false;
 
             }
@@ -654,7 +660,7 @@ public class CustomManager : MonoBehaviour
     public void XButton()
     {
         Sounds[0].Play();
-        BuyButtonText.text = "Buy";
+        BuyButtonText.text = buyText;
 
         GeneralPanels[0].SetActive(false);
 
@@ -689,7 +695,7 @@ public class CustomManager : MonoBehaviour
         //  Debug.Log("Chapter no : " + activeItemPanelIndex + "Item Index" + HatIndex + " Item Ad : " + itemInformations[HatIndex].ItemName);
         itemInformations[index].isBuy = true;
         memoryManager.SaveData_Int("Puan", memoryManager.LoadData_Int("Puan") - itemInformations[index].Puan);
-        BuyButtonText.text = "Buy";
+        BuyButtonText.text = buyText;
         OperationButtons[0].interactable = false;
         OperationButtons[1].interactable = true;
         PuanText.text = memoryManager.LoadData_Int("Puan").ToString();
