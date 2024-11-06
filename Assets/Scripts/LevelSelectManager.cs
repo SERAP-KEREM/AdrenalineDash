@@ -15,11 +15,14 @@ public class LevelSelectManager : MonoBehaviour
     MemoryManager memoryManager=new MemoryManager();
     public AudioSource ButtonAudio;
 
-
+    public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
+    List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
+    public TextMeshProUGUI TextObjects;
+    DataManager dataManager = new DataManager();
     void Start()
     {
         ButtonAudio.volume = memoryManager.LoadData_Float("MenuFX");
-
+    
        // memoryManager.SaveData_Int("EndLevel", Level);
 
         int currentLevel = memoryManager.LoadData_Int("EndLevel")-4;
@@ -40,8 +43,28 @@ public class LevelSelectManager : MonoBehaviour
             }
             Index++;
         }
-    }
 
+        dataManager.LanguageLoad();
+        languageReadData = dataManager.LanguageExportList();
+        languageDataMainObject.Add(languageReadData[2]);
+
+        LanguageChoiceManagement();
+    }
+    public void LanguageChoiceManagement()
+    {
+        if (memoryManager.LoadData_String("Language") == "TR")
+        {
+              TextObjects.text = languageDataMainObject[0].languageData_TR[0]._text;
+            
+        }
+        else
+        {
+              TextObjects.text = languageDataMainObject[0].languageData_EN[0]._text;
+            
+        }
+
+
+    }
     void Update()
     {
         
