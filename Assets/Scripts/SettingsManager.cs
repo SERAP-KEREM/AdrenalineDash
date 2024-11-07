@@ -7,6 +7,7 @@ using SerapKerem;
 using System.Buffers;
 using TMPro;
 
+
 public class SettingsManager : MonoBehaviour
 {
 
@@ -21,7 +22,7 @@ public class SettingsManager : MonoBehaviour
     DataManager dataManager = new DataManager();
 
     [Header("Language Options Objects")]
-    public TextMeshProUGUI[] LanguageText;
+    public TextMeshProUGUI LanguageText;
     public Button[] LanguageButtons;
     int activeLanguageIndex=0;
  
@@ -38,6 +39,7 @@ public class SettingsManager : MonoBehaviour
         languageDataMainObject.Add(languageReadData[4]);
 
         LanguageChoiceManagement();
+        CheckLanguageStatus();
 
     }
     public void LanguageChoiceManagement()
@@ -87,15 +89,46 @@ public class SettingsManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    void CheckLanguageStatus()
+    {
+        if (memoryManager.LoadData_String("Language") == "TR")
+        {
+
+            activeLanguageIndex = 0;
+            LanguageText.text = "TÜRKÇE";
+            LanguageButtons[0].interactable=false;
+        }
+        else
+        {
+            LanguageText.text = "ENGLISH";
+
+            activeLanguageIndex = 1;
+            LanguageButtons[1].interactable=false;
+        }
+    }
+
     public void ChangeLanguage(string butonText)
     {
 
         if (butonText == "next")
         {
+            LanguageText.text = "ENGLISH";
 
+            activeLanguageIndex = 1;
+            LanguageButtons[1].interactable = false;
+            LanguageButtons[0].interactable = true;
+            memoryManager.SaveData_String("Language", "EN");
+            LanguageChoiceManagement();
         }
         else
         {
+            activeLanguageIndex = 0;
+            LanguageText.text = "TÜRKÇE";
+            LanguageButtons[0].interactable = false;
+            LanguageButtons[1].interactable = true;
+            memoryManager.SaveData_String("Language", "TR");
+            LanguageChoiceManagement();
+
 
         }
 
