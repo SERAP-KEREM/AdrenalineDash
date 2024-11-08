@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] ProcessPanels;
     public Slider gameVolumeSetting;
 
+    public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
+    List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
+    public TextMeshProUGUI[] TextObjects;
+    DataManager dataManager = new DataManager();
+
     private void Awake()
     {
         Sources[0].volume = memoryManager.LoadData_Float("GameVoice");
@@ -58,6 +63,33 @@ public class GameManager : MonoBehaviour
         EnemyMakes();
         Debug.Log(memoryManager.LoadData_Int("Puan"));
         scene = SceneManager.GetActiveScene();
+
+        dataManager.LanguageLoad();
+        languageReadData = dataManager.LanguageExportList();
+        languageDataMainObject.Add(languageReadData[5]);
+
+        LanguageChoiceManagement();
+
+    }
+
+    public void LanguageChoiceManagement()
+    {
+        if (memoryManager.LoadData_String("Language") == "TR")
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = languageDataMainObject[0].languageData_TR[i]._text;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = languageDataMainObject[0].languageData_EN[i]._text;
+            }
+        }
+
+
     }
 
     public void EnemyMakes()
