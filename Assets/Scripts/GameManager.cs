@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
 
                 if (ActiveCharacterCount < EnemyCount || ActiveCharacterCount == EnemyCount)
                 {
-                    Debug.Log("Kaybettin");
+                    ProcessPanels[3].SetActive(true);
                 }
                 else
                 {
@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
                             memoryManager.SaveData_Int("EndLevel", memoryManager.LoadData_Int("EndLevel") + 1);
                         }
                     }
-                    Debug.Log("Kazandın");
+                    ProcessPanels[2].SetActive(true);
                 }
             }
 
@@ -326,6 +326,11 @@ public class GameManager : MonoBehaviour
         meshRenderer[0].materials = mats;
         meshRenderer[1].materials = mats;
         meshRenderer[2].materials = mats;
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(scene.buildIndex + 1);   
     }
 
 }
