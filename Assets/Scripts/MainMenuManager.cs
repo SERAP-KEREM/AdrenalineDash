@@ -20,6 +20,8 @@ public class MainMenuManager : MonoBehaviour
     public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
     List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
     public TextMeshProUGUI[] TextObjects;
+    public GameObject LoadingPanel;
+    public Slider LoadingSlider;
 
     private void Start()
     {
@@ -65,9 +67,22 @@ public class MainMenuManager : MonoBehaviour
     public void Play()
     {
         ButtonAudio.Play();
-       SceneManager.LoadScene(memoryManager.LoadData_Int("EndLevel"));
-        
+        StartCoroutine(LoadAsync(memoryManager.LoadData_Int("EndLevel")));
     }
+
+    IEnumerator LoadAsync(int SceneIndex)
+    {
+        AsyncOperation operation=SceneManager.LoadSceneAsync(SceneIndex);   
+
+        LoadingPanel.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            LoadingSlider.value=operation.progress;
+            yield return null;
+        }
+    }
+
   
     public void ExitButtonProcess(string _event)
     {
