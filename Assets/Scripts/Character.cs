@@ -13,93 +13,97 @@ public class Character : MonoBehaviour
 
     public Slider slider;
     public GameObject TransitPoint;
+    private Vector3 lastMousePosition;
+    public float sensitivity = 0.01f; // Fare hareket hassasiyeti
+
     private void FixedUpdate()
     {
-        if(!isFinal)
+        if (!isFinal)
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
-
     private void Start()
     {
-            float fark = Vector3.Distance(transform.position, TransitPoint.transform.position);
+        float fark = Vector3.Distance(transform.position, TransitPoint.transform.position);
         slider.maxValue = fark;
     }
+
     private void Update()
     {
-
-
-        if(isFinal)
+        if (isFinal)
         {
+            // Final hedefine do?ru yava?ça ilerleme
             transform.position = Vector3.Lerp(transform.position, FinalTarget.transform.position, 0.001f);
-            if(slider.value != 0f)
-            {
-                slider.value -= .01f;
 
+            // Slider de?eri s?f?ra do?ru azal?r
+            if (slider.value > 0f)
+            {
+                slider.value -= 0.01f;
             }
         }
         else
         {
             float fark = Vector3.Distance(transform.position, TransitPoint.transform.position);
-            slider.value = fark;    
-           if(Time.timeScale!=0)
+            slider.value = fark;
+
+            if (Time.timeScale != 0 && Input.GetKey(KeyCode.Mouse0))
             {
- if (Input.GetKey(KeyCode.Mouse0))
-            {
-                if (Input.GetAxis("Mouse X") < 0)
+                Vector3 delta = Input.mousePosition - lastMousePosition;
+
+                // Mouse hareketlerini kontrol ederek pozisyonu güncelle
+                if (delta.x < 0)
                 {
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z), .3f);
+                    transform.position += Vector3.left * Mathf.Abs(delta.x) * sensitivity;
                 }
-                if (Input.GetAxis("Mouse X") > 0)
+                else if (delta.x > 0)
                 {
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + 0.1f, transform.position.y, transform.position.z), .3f);
+                    transform.position += Vector3.right * delta.x * sensitivity;
                 }
 
+                // X ekseninde hareketi -1 ile 1 aras?nda s?n?rland?r
+                transform.position = new Vector3(
+                    Mathf.Clamp(transform.position.x, -1f, 1f),
+                    transform.position.y,
+                    transform.position.z
+                );
+
+                lastMousePosition = Input.mousePosition;
             }
-            }
-           
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-          if(other.CompareTag("Toplama")||other.CompareTag("Cikarma") ||other.CompareTag("Carpma") || other.CompareTag("Bolme"))
+        if (other.CompareTag("Toplama") || other.CompareTag("Cikarma") || other.CompareTag("Carpma") || other.CompareTag("Bolme"))
         {
-           
             int sayi = int.Parse(other.name);
-            gameManager.ManManager(other.tag,sayi,other.transform);
+            gameManager.ManManager(other.tag, sayi, other.transform);
         }
-          if(other.CompareTag("FinalTrigger"))
+        else if (other.CompareTag("FinalTrigger"))
         {
-            camera.GetComponent<CameraController>().isFinal=true;
+            camera.isFinal = true;
             gameManager.EnemiesAttack();
             isFinal = true;
-        } 
-        if(other.CompareTag("FreeCharacter"))
+        }
+        else if (other.CompareTag("FreeCharacter"))
         {
             gameManager.Characters.Add(other.gameObject);
-           
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Pole")|| collision.gameObject.CompareTag("CubeObstacle")||collision.gameObject.CompareTag("PervaneDisli")|| collision.gameObject.CompareTag("Balyoz"))
+        if (collision.gameObject.CompareTag("Pole") || collision.gameObject.CompareTag("CubeObstacle") || collision.gameObject.CompareTag("PervaneDisli") || collision.gameObject.CompareTag("Balyoz"))
         {
+            float adjustment = 0.3f;
             if (transform.position.x > 0f)
             {
-
-                Debug.Log("1");
-                transform.position = new Vector3(transform.position.x - 0.3f, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x - adjustment, transform.position.y, transform.position.z);
             }
             else
             {
-
-                Debug.Log("2");
-
-                transform.position = new Vector3(transform.position.x + 0.3f, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x + adjustment, transform.position.y, transform.position.z);
             }
-
         }
     }
 }

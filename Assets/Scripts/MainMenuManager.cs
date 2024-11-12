@@ -28,7 +28,7 @@ public class MainMenuManager : MonoBehaviour
         memoryManager.ControlAndDefine();
         dataManager.FirstCreateSave(default_ItemInformations, default_LanguageData);
         ButtonAudio.volume = memoryManager.LoadData_Float("MenuFX");
-      //   memoryManager.SaveData_String("Language", "TR");
+      //  memoryManager.SaveData_String("Language", "TR");
 
         dataManager.LanguageLoad();
         languageReadData = dataManager.LanguageExportList();
@@ -78,6 +78,7 @@ public class MainMenuManager : MonoBehaviour
 
         while (!operation.isDone)
         {
+            float progress=Mathf.Clamp01(operation.progress/0.9f);   
             LoadingSlider.value=operation.progress;
             yield return null;
         }
