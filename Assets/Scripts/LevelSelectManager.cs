@@ -17,8 +17,11 @@ public class LevelSelectManager : MonoBehaviour
 
     public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
     List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
-    public TextMeshProUGUI TextObjects;
+    public TextMeshProUGUI[] TextObjects;
     DataManager dataManager = new DataManager();
+
+    public GameObject LoadingPanel;
+    public Slider LoadingSlider;
     void Start()
     {
         ButtonAudio.volume = memoryManager.LoadData_Float("MenuFX");
@@ -54,27 +57,40 @@ public class LevelSelectManager : MonoBehaviour
     {
         if (memoryManager.LoadData_String("Language") == "TR")
         {
-              TextObjects.text = languageDataMainObject[0].languageData_TR[0]._text;
-            
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = languageDataMainObject[0].languageData_TR[i]._text;
+            }
         }
         else
         {
-              TextObjects.text = languageDataMainObject[0].languageData_EN[0]._text;
-            
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = languageDataMainObject[0].languageData_EN[i]._text;
+            }
         }
 
 
     }
-    void Update()
+    IEnumerator LoadAsync(int SceneIndex)
     {
-        
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneIndex);
+
+        LoadingPanel.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            LoadingSlider.value = operation.progress;
+            yield return null;
+        }
     }
 
     public void SceneLoad(int Index)
     {
         ButtonAudio.Play();
-        SceneManager.LoadScene(Index);
-        Debug.Log(Index);
+        StartCoroutine(LoadAsync(Index));
+
     }
     public void PreviousButton()
     {

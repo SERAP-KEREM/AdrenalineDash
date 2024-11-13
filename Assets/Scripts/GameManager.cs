@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     MathematicalOperations mathematicalOperations = new MathematicalOperations();
     MemoryManager memoryManager = new MemoryManager();
 
+    public GameObject LoadingPanel;
+    public Slider LoadingSlider;
+
     [Header("----------------Hats")]
     public GameObject[] Hats;
 
@@ -92,6 +95,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    IEnumerator LoadAsync(int SceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneIndex);
+
+        LoadingPanel.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            LoadingSlider.value = operation.progress;
+            yield return null;
+        }
+    }
     public void EnemyMakes()
     {
         for (int i = 0; i < EnemyCount; i++)
@@ -330,7 +346,9 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(scene.buildIndex + 1);   
+        
+        StartCoroutine(LoadAsync(scene.buildIndex + 1));
+
     }
 
 }
