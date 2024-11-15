@@ -20,6 +20,7 @@ public class MainMenuManager : MonoBehaviour
     public List<LanguageDataMainObject> languageDataMainObject = new List<LanguageDataMainObject>();
     List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
     public TextMeshProUGUI[] TextObjects;
+    [Header("Loading Datas")]
     public GameObject LoadingPanel;
     public Slider LoadingSlider;
 

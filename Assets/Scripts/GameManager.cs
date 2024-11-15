@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     MathematicalOperations mathematicalOperations = new MathematicalOperations();
     MemoryManager memoryManager = new MemoryManager();
 
+    [Header("Loading Datas")]
     public GameObject LoadingPanel;
     public Slider LoadingSlider;
 

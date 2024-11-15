@@ -206,7 +206,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -945,8 +945,10 @@ MonoBehaviour:
   - SectionIndex: 0
     languageData_TR:
     - _text: "LEVEL SE\xC7"
+    - _text: "Y\xDCKLEN\u0130YOR"
     languageData_EN:
     - _text: SELECT LEVEL
+    - _text: LOADING
   - SectionIndex: 0
     languageData_TR:
     - _text: "ALI\u015EVER\u0130\u015E"
@@ -972,12 +974,14 @@ MonoBehaviour:
     - _text: OYUN DURAKLATILDI
     - _text: KAZANDIN
     - _text: "KAYBETT\u0130N"
+    - _text: "Y\xDCKLEN\u0130YOR"
     languageData_EN:
     - _text: SETTINGS
     - _text: GAME SOUND
     - _text: GAME PAUSED
     - _text: YOU WIN
     - _text: YOU LOSE
+    - _text: LOADING
   ButtonAudio: {fileID: 532651054}
   languageDataMainObject: []
   TextObjects:
@@ -1482,7 +1486,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1616,7 +1620,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2673,7 +2677,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1

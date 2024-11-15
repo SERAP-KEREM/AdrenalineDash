@@ -19,7 +19,7 @@ public class LevelSelectManager : MonoBehaviour
     List<LanguageDataMainObject> languageReadData = new List<LanguageDataMainObject>();
     public TextMeshProUGUI[] TextObjects;
     DataManager dataManager = new DataManager();
-
+    [Header("Loading Datas")]
     public GameObject LoadingPanel;
     public Slider LoadingSlider;
     void Start()
