@@ -1,3 +1,4 @@
+using SerapKerem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class FreeCharacter : MonoBehaviour
     public GameObject Target;
 
     public GameManager gameManager;
-
+    MemoryManager memoryManager = new MemoryManager();
     bool isContact;
 
 
@@ -75,9 +76,10 @@ public class FreeCharacter : MonoBehaviour
     }
     void MatChangeAndAnimPlay()
     {
-
+        int mat= memoryManager.LoadData_Int("ActiveTheme");
+        
         Material[] mats = meshRenderer.materials;
-        mats[0] = CharacterMaterial;
+        gameObject.GetComponent<Renderer>().material =mats[mat] ;
         meshRenderer.materials = mats;
 
         animator.SetBool("Attack", true);
@@ -85,4 +87,5 @@ public class FreeCharacter : MonoBehaviour
         GameManager.ActiveCharacterCount++;
        // Debug.Log(GameManager.ActiveCharacterCount);
     }
+ 
 }
